@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SafarCare — Understand your ticket before you reach the airport</title>
+<meta name="description" content="SafarCare reads your flight ticket and explains it in plain English, Somali or Arabic: flights, connections, baggage allowance, and what to prepare before you travel.">
+<meta property="og:title" content="SafarCare — Travel Prepared. Travel Confident.">
+<meta property="og:description" content="Scan your ticket. Understand your flights and baggage. Prepare with a checklist and airport guide — in English, Somali and Arabic.">
+<meta property="og:image" content="/assets/icon-512.png">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="#top" aria-label="SafarCare home">
+      <svg class="mark" viewBox="0 0 26 26" width="36" height="36" aria-hidden="true"><rect width="26" height="26" rx="8" fill="#0B1F3A"/><g fill="#2EC4B6"><circle cx="6.2" cy="14.9" r="1"/><circle cx="8.3" cy="11.5" r="1"/><circle cx="11.2" cy="9" r="1"/><circle cx="14.4" cy="7.6" r="1"/><circle cx="5" cy="19" r="2.6"/></g><path d="M17.5 3.5 21 7l-3.5 3.5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>SafarCare</span>
+    </a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="#how" data-i18n="navHow">How it works</a>
+      <a href="#features" data-i18n="navFeatures">Features</a>
+      <a href="#guide" data-i18n="navGuide">Airport guide</a>
+      <a href="#privacy" data-i18n="navPrivacy">Privacy</a>
+    </nav>
+    <div class="header-tools">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="so" aria-pressed="false">SO</button>
+        <button type="button" data-lang="ar" aria-pressed="false" lang="ar">عربي</button>
+      </div>
+      <a class="btn btn-small" href="/preview/" data-i18n="ctaPreviewShort">Try the preview</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO: the ticket decoder -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 data-i18n="heroTitle">Understand your ticket before you reach the airport.</h1>
+      <p class="lede" data-i18n="heroLede">SafarCare reads your flight ticket — a screenshot, a photo, a PDF or a WhatsApp image — and explains it in plain words: your flights, your connections and exactly how much baggage you can bring.</p>
+      <div class="hero-actions">
+        <a class="btn" href="/preview/" data-i18n="ctaPreview">Try the app preview</a>
+        <a class="btn btn-ghost" href="#launch" data-i18n="ctaNotify">Tell me when it launches</a>
+      </div>
+      <p class="hero-note" data-i18n="heroNote">For Android and iPhone. In English, Somali and Arabic. Free, with no ads.</p>
+    </div>
+
+    <div class="decoder" aria-labelledby="decoder-hint">
+      <p id="decoder-hint" class="decoder-hint" data-i18n="decoderHint">Tap anything printed on this ticket to see what it means.</p>
+      <div class="pass" role="group" aria-label="Sample boarding pass">
+        <div class="pass-scan" aria-hidden="true"></div>
+        <div class="pass-top">
+          <span class="pass-air">ETHIOPIAN</span>
+          <span class="pass-kind">E-TICKET RECEIPT</span>
+        </div>
+        <div class="pass-route">
+          <button type="button" class="code-btn big" data-field="from">HGA</button>
+          <svg class="pass-path" viewBox="0 0 120 24" aria-hidden="true"><path d="M2 20 Q60 -8 118 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 5"/></svg>
+          <button type="button" class="code-btn big" data-field="via">ADD</button>
+          <svg class="pass-path" viewBox="0 0 120 24" aria-hidden="true"><path d="M2 20 Q60 -8 118 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 5"/></svg>
+          <button type="button" class="code-btn big" data-field="to">DXB</button>
+        </div>
+        <div class="pass-grid">
+          <div><span class="k">NAME</span><button type="button" class="code-btn" data-field="name">HASSAN/AMINA MS</button></div>
+          <div><span class="k">PNR</span><button type="button" class="code-btn" data-field="pnr">QK7M2P</button></div>
+          <div><span class="k">FLT</span><button type="button" class="code-btn" data-field="flt">ET 908</button></div>
+          <div><span class="k">DATE</span><button type="button" class="code-btn" data-field="date">19NOV 1430</button></div>
+          <div><span class="k">STATUS</span><button type="button" class="code-btn" data-field="status">HK1</button></div>
+          <div><span class="k">CL</span><button type="button" class="code-btn" data-field="cl">Y</button></div>
+          <div><span class="k">BAG</span><button type="button" class="code-btn" data-field="bag">2PC 23KG</button></div>
+          <div><span class="k">CABIN</span><button type="button" class="code-btn missing" data-field="cabin">—</button></div>
+        </div>
+        <div class="pass-stub" aria-hidden="true"><span></span></div>
+      </div>
+      <div class="explain" role="region" aria-live="polite" aria-label="Explanation">
+        <p class="explain-code" id="explain-code">2PC 23KG</p>
+        <p class="explain-title" id="explain-title">2 bags, up to 23 kg each</p>
+        <p class="explain-body" id="explain-body">You can check in two suitcases. Each one must weigh 23 kg or less.</p>
+      </div>
+      <p class="decoder-foot" data-i18n="decoderFoot">Sample ticket with made-up details.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="wrap why-grid">
+    <h2 data-i18n="whyTitle">Tickets are written for airline systems, not for passengers.</h2>
+    <div class="why-body">
+      <p data-i18n="whyP1">PNR, HK1, 2PC, a terminal number, two flights on one page. For someone flying abroad for the first time — or helping a parent or relative travel — a ticket can raise more questions than it answers.</p>
+      <p data-i18n="whyP2">SafarCare turns it into a clear plan you can read in your own language, and tells you plainly when something isn't on the ticket, so you know what to ask your airline.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS: a real sequence -->
+<section class="how" id="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <h2 id="how-title" data-i18n="howTitle">From ticket to ready, in three steps</h2>
+    <ol class="steps">
+      <li class="step">
+        <div class="phone" aria-hidden="true">
+          <div class="ph-bar"></div>
+          <div class="ph-scan"><div class="ph-frame"><div class="ph-line"></div></div></div>
+          <div class="ph-btn dark"></div><div class="ph-btn"></div><div class="ph-btn"></div>
+        </div>
+        <div class="step-text">
+          <span class="step-n">1</span>
+          <h3 data-i18n="step1Title">Scan your ticket</h3>
+          <p data-i18n="step1Body">Take a photo, choose a screenshot or WhatsApp image, or open the PDF. The ticket is read on your phone.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="phone" aria-hidden="true">
+          <div class="ph-bar"></div>
+          <div class="ph-rows"><i></i><i></i><i></i><i class="nf"></i></div>
+          <div class="ph-card"><b>2 × 23 kg</b></div>
+          <div class="ph-card warn"></div>
+          <div class="ph-lines"><i></i><i></i></div>
+        </div>
+        <div class="step-text">
+          <span class="step-n">2</span>
+          <h3 data-i18n="step2Title">Check what it found</h3>
+          <p data-i18n="step2Body">See your flights, times, connections and baggage. Anything the ticket doesn't show is marked “Not found” — never guessed. Correct or fill in any detail.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="phone" aria-hidden="true">
+          <div class="ph-bar"></div>
+          <div class="ph-ring"><span>63%</span></div>
+          <div class="ph-check on"></div><div class="ph-check on"></div><div class="ph-check"></div><div class="ph-check"></div>
+        </div>
+        <div class="step-text">
+          <span class="step-n">3</span>
+          <h3 data-i18n="step3Title">Prepare with confidence</h3>
+          <p data-i18n="step3Body">Save the trip and get a checklist made for it, reminders of what to check, and a step-by-step airport guide.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features" aria-labelledby="features-title">
+  <div class="wrap">
+    <h2 id="features-title" data-i18n="featTitle">Everything about your trip, in one place</h2>
+
+    <div class="feat feat-lead">
+      <div>
+        <h3 data-i18n="fBagTitle">Your own baggage allowance</h3>
+        <p data-i18n="fBagBody">Read from your ticket — not a general airline rule. Checked and cabin bags are kept apart and explained simply. If your ticket doesn't make it clear, SafarCare says so and tells you to check with your airline.</p>
+      </div>
+      <dl class="bag-codes">
+        <div><dt>2PC</dt><dd data-i18n="code2pc">Two checked bags</dd></div>
+        <div><dt>23KG</dt><dd data-i18n="code23">Up to 23 kg each, when shown with pieces</dd></div>
+        <div><dt>30KG</dt><dd data-i18n="code30">On its own: 30 kg in total</dd></div>
+        <div><dt>NIL</dt><dd data-i18n="codeNil">No checked bag included</dd></div>
+      </dl>
+    </div>
+
+    <div class="feat-cols">
+      <article class="feat">
+        <svg class="fi" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        <h3 data-i18n="fTripsTitle">My Trips</h3>
+        <p data-i18n="fTripsBody">Upcoming and past journeys, each with its flights, booking details and the original ticket — kept encrypted on your phone.</p>
+      </article>
+      <article class="feat">
+        <svg class="fi" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1.5 1.5L7.5 5M3.5 12l1.5 1.5L7.5 11M3.5 18l1.5 1.5L7.5 17"/></svg>
+        <h3 data-i18n="fListTitle">A checklist for each trip</h3>
+        <p data-i18n="fListBody">Passport, transit, hotel, packing and when to reach the airport. Tick items off, remove what doesn't apply, add your own.</p>
+      </article>
+      <article class="feat">
+        <svg class="fi" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 12l2 2 4-4M9 17h6"/></svg>
+        <h3 data-i18n="fReqTitle">Travel requirements reminders</h3>
+        <p data-i18n="fReqBody">Reminds you to check your passport's expiry, visa requirements, transit documents and insurance — with the embassy, immigration office or airline.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- AIRPORT GUIDE: a real sequence, drawn as a route -->
+<section class="guide" id="guide" aria-labelledby="guide-title">
+  <div class="wrap">
+    <div class="guide-head">
+      <h2 id="guide-title" data-i18n="guideTitle">Your first time through an international airport</h2>
+      <p data-i18n="guideBody">The app walks you through every stage in simple steps, so nothing comes as a surprise.</p>
+    </div>
+    <ol class="route">
+      <li><span class="dot"></span><b data-i18n="g1">Check-in and bag drop</b></li>
+      <li><span class="dot"></span><b data-i18n="g2">Security</b></li>
+      <li><span class="dot"></span><b data-i18n="g3">Passport control</b></li>
+      <li><span class="dot"></span><b data-i18n="g4">Finding your gate</b></li>
+      <li><span class="dot"></span><b data-i18n="g5">Boarding</b></li>
+      <li class="transit"><span class="dot"></span><b data-i18n="g6">Changing planes</b></li>
+      <li><span class="dot"></span><b data-i18n="g7">Arrival passport control</b></li>
+      <li><span class="dot"></span><b data-i18n="g8">Collecting your bags</b></li>
+    </ol>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section class="langs" aria-labelledby="langs-title">
+  <div class="wrap">
+    <h2 id="langs-title" data-i18n="langsTitle">In the language you think in</h2>
+    <p class="langs-sub" data-i18n="langsBody">The whole app works in English, Somali and Arabic — including right-to-left layout for Arabic. Switch at any time.</p>
+    <div class="trio">
+      <blockquote lang="en"><p>You can check in 2 bags. Each one must weigh 23 kg or less.</p><cite>English</cite></blockquote>
+      <blockquote lang="so"><p>Waxaad dhiibi kartaa 2 shandad. Mid kasta waa inuu ahaadaa 23 kg ama ka yar.</p><cite>Soomaali</cite></blockquote>
+      <blockquote lang="ar" dir="rtl"><p>يمكنك تسجيل حقيبتين. يجب ألا يزيد وزن كل واحدة على 23 كغ.</p><cite>العربية</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- HONESTY -->
+<section class="promise" id="privacy" aria-labelledby="promise-title">
+  <div class="wrap promise-grid">
+    <div>
+      <h2 id="promise-title" data-i18n="promiseTitle">Clear about what we do, and what we don't</h2>
+      <p data-i18n="promiseBody">Travel information has to be right. So SafarCare is built to be honest about its limits.</p>
+    </div>
+    <ul class="promises">
+      <li><h3 data-i18n="p1t">We never guess</h3><p data-i18n="p1b">If a detail isn't on your ticket, you'll see “Not found” and what to ask your airline.</p></li>
+      <li><h3 data-i18n="p2t">We don't decide visas</h3><p data-i18n="p2b">Visa rules depend on your passport and change often. SafarCare reminds you to check with the embassy or immigration authority instead.</p></li>
+      <li><h3 data-i18n="p3t">Your ticket stays on your phone</h3><p data-i18n="p3b">Tickets are read on your device and saved encrypted. An account is optional and only backs up your trip details — never the ticket file.</p></li>
+      <li><h3 data-i18n="p4t">No ads, no selling data</h3><p data-i18n="p4b">Your documents are never shown to anyone else, sold, or used for advertising. Delete anything at any time.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" aria-labelledby="faq-title">
+  <div class="wrap faq-wrap">
+    <h2 id="faq-title" data-i18n="faqTitle">Questions</h2>
+    <div class="faq-list">
+      <details><summary data-i18n="q1">Is SafarCare free?</summary><p data-i18n="a1">Yes. SafarCare is free and has no advertisements.</p></details>
+      <details><summary data-i18n="q2">Which tickets can it read?</summary><p data-i18n="a2">E-ticket screenshots, photos of printed tickets, PDF tickets and booking confirmations, and ticket images sent on WhatsApp. If a picture is too blurry, the app tells you how to take a better one.</p></details>
+      <details><summary data-i18n="q3">Can it tell me if I need a visa?</summary><p data-i18n="a3">No. It reminds you to check visa, transit and passport requirements with the official authority, and lets you keep notes on what they told you.</p></details>
+      <details><summary data-i18n="q4">Do I need an account?</summary><p data-i18n="a4">No. Everything works without one. An account only backs up your trips so you can get them back on a new phone.</p></details>
+      <details><summary data-i18n="q5">When can I download it?</summary><p data-i18n="a5">SafarCare is being prepared for Google Play and the App Store. Leave your email below and we'll tell you when it's ready.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- LAUNCH -->
+<section class="launch" id="launch" aria-labelledby="launch-title">
+  <div class="wrap launch-grid">
+    <div>
+      <h2 id="launch-title" data-i18n="launchTitle">Travel prepared. Travel confident.</h2>
+      <p data-i18n="launchBody">Be the first to know when SafarCare is ready to download. Until then, try the preview in your browser.</p>
+      <a class="btn btn-light" href="/preview/" data-i18n="ctaPreview">Try the app preview</a>
+    </div>
+    <form class="notify" name="launch-list" method="POST" data-netlify="true" netlify-honeypot="company" action="/thanks.html">
+      <input type="hidden" name="form-name" value="launch-list">
+      <p class="hp"><label>Company <input name="company" tabindex="-1" autocomplete="off"></label></p>
+      <label for="email" data-i18n="emailLabel">Email address</label>
+      <input id="email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="name@example.com">
+      <input type="hidden" name="language" id="form-lang" value="en">
+      <p class="field-error" id="email-error" hidden data-i18n="emailError">Enter an email address like name@example.com.</p>
+      <button class="btn btn-turq" type="submit" data-i18n="notifySubmit">Tell me when it launches</button>
+      <p class="fine" data-i18n="notifyFine">We'll only email you about the launch. Unsubscribe any time.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <p><b>SafarCare</b> <span data-i18n="footTag">Travel Prepared. Travel Confident.</span></p>
+    <p class="fine" data-i18n="footNote">SafarCare gives guidance only. Always confirm important details with your airline and the relevant authorities.</p>
+    <p class="fine">© 2026 SafarCare</p>
+  </div>
+</footer>
+
+<script src="/main.js" defer></script>
+</body>
+</html>

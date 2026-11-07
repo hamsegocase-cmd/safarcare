@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SafarCare — App Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1F3A;--navy2:#13305A;--turq:#2EC4B6;--turqD:#0B7A75;--tint:#DDF4F1}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#E9EDF3;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;gap:16px;padding:24px 12px;color:#0B1F3A}
+body[data-theme=dark]{background:#030a16;color:#E8EEF6}
+.intro{max-width:560px;text-align:center;font-size:14px;line-height:1.5}
+.intro h1{font-family:Manrope,sans-serif;margin:0 0 4px;font-size:22px}
+.intro p{margin:0;opacity:.8}
+#phone{--bg:#F4F6FA;--card:#fff;--muted:#5B6B82;--text:#0B1F3A;--soft:#E7EDF6;--line:#E3E9F1;--hero:#0B1F3A;--acc:#0B7A75;--tintc:#DDF4F1;--warnbg:#FFF8EC;--warnfg:#8A5300;--warnb:#F3D9A8;
+ width:390px;height:844px;border-radius:44px;overflow:hidden;position:relative;background:var(--bg);color:var(--text);box-shadow:0 0 0 10px #0B1F3A,0 30px 60px rgba(11,31,58,.35);display:flex;flex-direction:column}
+#phone[data-theme=dark]{--bg:#07142A;--card:#0F2440;--muted:#9FB0C7;--text:#E8EEF6;--soft:#1A3354;--line:#1A3354;--hero:#13305A;--acc:#2EC4B6;--tintc:rgba(46,196,182,.16);--warnbg:#3A2A10;--warnfg:#F6C77A;--warnb:#3A2A10}
+#phone[dir=rtl]{font-family:'IBM Plex Sans Arabic',Inter,sans-serif}
+#phone[dir=rtl] .flip{transform:scaleX(-1)}
+@media (max-width:500px){body{padding:0}.intro{padding:16px 16px 0}#phone{width:100%;height:100dvh;border-radius:0;box-shadow:none}}
+.screen{flex:1;display:flex;flex-direction:column;min-height:0}
+.scroll{flex:1;overflow-y:auto;overscroll-behavior:contain}
+.pad{padding:16px 20px 28px;display:flex;flex-direction:column;gap:12px}
+.pb{padding-bottom:100px}
+.appbar{display:flex;align-items:center;gap:10px;padding:46px 16px 8px}
+.appbar h1{font-family:Manrope,'IBM Plex Sans Arabic',sans-serif;font-size:20px;font-weight:800;margin:0}
+#phone[dir=rtl] .appbar h1,#phone[dir=rtl] h2,#phone[dir=rtl] .h2,#phone[dir=rtl] .h3,#phone[dir=rtl] .hero-t{font-family:'IBM Plex Sans Arabic',sans-serif}
+h2{font-family:Manrope,sans-serif;font-size:17px;margin:10px 0 0}
+h3{font-size:15px;margin:8px 0 0}
+p{margin:0;line-height:1.5}
+.h2{font-family:Manrope,sans-serif;font-size:20px;font-weight:800}
+.h3{font-family:Manrope,sans-serif;font-size:17px;font-weight:700}
+.small{font-size:13px;line-height:1.45}.xs{font-size:12px;line-height:1.4}
+.muted{color:var(--muted)}.acc{color:var(--acc)}.center{text-align:center}.upper{text-transform:uppercase;letter-spacing:.06em}
+.grow{flex:1;min-width:0}
+.row{display:flex;align-items:center;gap:12px}.row.top{align-items:flex-start}.mt{margin-top:14px}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+.card{background:var(--card);border-radius:20px;padding:16px;border:0;box-shadow:0 1px 2px rgba(11,31,58,.06);text-align:start;width:100%;display:block}
+.card.row{display:flex}.card.nopad{padding:0;overflow:hidden}
+.iconbtn{width:44px;height:44px;border-radius:14px;border:0;background:var(--card);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.avatar{width:44px;height:44px;border-radius:22px;border:0;background:var(--tintc);color:var(--acc);display:flex;align-items:center;justify-content:center}
+.logo{display:inline-flex;background:var(--navy);border-radius:30%;align-items:center;justify-content:center}
+.hero{position:relative;overflow:hidden;background:var(--hero);border-radius:24px;padding:22px;color:#fff;display:flex;flex-direction:column;gap:6px}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(46,196,182,.3);inset-inline-end:-40px;top:-40px;width:170px;height:170px}.ring.r2{inset-inline-end:-10px;top:-10px;width:110px;height:110px}
+.eyebrow{color:var(--turq);font-weight:600;font-size:12px;letter-spacing:.08em}
+#phone[dir=rtl] .eyebrow{letter-spacing:0}
+.hero-t{font-family:Manrope,sans-serif;font-size:24px;font-weight:800;line-height:1.2;max-width:260px}
+.hero-b{color:#B9C6D8;font-size:14px;line-height:1.45;max-width:280px;margin-bottom:10px}
+.btn{height:52px;border:0;border-radius:16px;background:var(--navy);color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 18px;width:100%}
+#phone[data-theme=dark] .btn{background:var(--turq);color:var(--navy)}
+.btn.turq{background:var(--turq);color:var(--navy)}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--text)}
+.btn.danger{background:#C62828;color:#fff}
+.small-btn{height:44px;width:auto;font-size:14px}
+.link{background:none;border:0;color:var(--acc);font-weight:600;font-size:14px;padding:8px 0;display:inline-flex;align-items:center;gap:6px;cursor:pointer;position:relative}
+.sect{display:flex;justify-content:space-between;align-items:center;margin-top:8px}.sect h2{margin:0}
+.tile{width:40px;height:40px;border-radius:12px;background:var(--soft);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.tile.accent{background:var(--tintc);color:var(--acc)}.tile.big{width:72px;height:72px;border-radius:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tool{display:flex;flex-direction:column;gap:10px;font-weight:600;font-size:14px}
+.journey{display:flex;flex-direction:column;gap:12px}
+.code{font-family:Manrope,sans-serif;font-size:26px;font-weight:800}.code.big{font-size:32px}
+.mid{display:flex;flex-direction:column;align-items:center;gap:2px}
+.dash{display:flex;align-items:center;gap:6px;width:100%}.dash::before,.dash::after{content:"";flex:1;border-top:2px dashed var(--line)}
+.dash.turq{color:var(--turq)}.dash.turq::before,.dash.turq::after{border-color:rgba(46,196,182,.6)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{background:var(--soft);border-radius:8px;padding:6px 10px;font-size:12px;font-weight:600}
+.bar{height:8px;border-radius:4px;background:var(--soft);overflow:hidden}.bar i{display:block;height:100%;background:var(--acc);border-radius:4px}
+.tabs{height:78px;background:var(--card);border-top:1px solid var(--line);display:flex;align-items:flex-start;padding-top:8px}
+.nav{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--muted);font-weight:500;padding:4px 0}
+.nav.on{color:var(--text);font-weight:700}
+.fab{width:58px;height:58px;margin:-26px 6px 0;border-radius:50%;border:0;background:var(--navy);color:var(--turq);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(11,31,58,.35)}
+#phone[data-theme=dark] .fab{background:var(--turq);color:var(--navy)}
+.banner{display:flex;gap:12px;align-items:flex-start;border-radius:16px;padding:14px;background:var(--soft);font-size:13px;line-height:1.45}
+.banner.warn{background:var(--warnbg);color:var(--warnfg);border:1px solid var(--warnb)}
+.banner.ok{background:var(--tintc);color:var(--acc)}
+.banner svg{flex-shrink:0}.banner b{display:block;margin-bottom:2px}
+.scanvis{height:190px;background:var(--hero);border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#fff}
+.frame{width:150px;height:116px;border:2px solid var(--turq);border-radius:18px;display:flex;align-items:center;justify-content:center}
+.spin{width:44px;height:44px;border-radius:50%;border:3px solid rgba(46,196,182,.25);border-top-color:var(--turq);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.muted-on-hero{color:#B9C6D8;font-size:14px}
+.src{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:20px;cursor:pointer}
+.src.primary{background:var(--hero);color:#fff}.src.primary .xs{color:#B9C6D8}.turq{color:var(--turq)}
+.preview-box{border:1.5px dashed var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.chipbtn{border:0;background:var(--tintc);color:var(--acc);border-radius:12px;padding:10px 12px;text-align:start;font-weight:600;font-size:13px}
+textarea,input[type=text],input:not([type]),input[inputmode],input[type=datetime-local],input[type=date]{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg);font-size:14px}
+.frow{display:flex;align-items:center;gap:10px;width:100%;min-height:52px;padding:8px 16px;border:0;border-top:1px solid var(--line);background:none;text-align:start}
+.card.nopad>.frow:first-child{border-top:0}
+.frow .val{margin-inline-start:auto;text-align:end}
+.segh{padding:10px 8px 4px 16px}
+.nf{background:var(--warnbg);color:var(--warnfg);border-radius:8px;padding:4px 8px;font-size:13px;font-weight:600}
+.bottom{position:absolute;left:0;right:0;bottom:0;padding:12px 20px 24px;background:linear-gradient(transparent,var(--bg) 30%)}
+.trip-hero{background:var(--hero);color:#fff;padding:46px 20px 20px;border-radius:0 0 28px 28px;display:flex;flex-direction:column;gap:14px}
+.trip-hero .xs{color:#B9C6D8}.turqtxt{color:var(--turq)!important;font-weight:600}
+.iconbtn.onhero{background:rgba(255,255,255,.1);color:#fff}
+.bottomalign{align-items:flex-end}.end{text-align:end}
+.det{display:flex;justify-content:space-between;gap:12px;padding:6px 0;font-size:14px}.det b{text-align:end}
+.prog{gap:16px}.ringp{--p:0;width:60px;height:60px;border-radius:50%;background:conic-gradient(var(--acc) calc(var(--p)*1%),var(--soft) 0);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ringp span{width:46px;height:46px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.ck{display:flex;align-items:center;gap:6px;padding:4px 8px 4px 16px;border-top:1px solid var(--line)}.ck:first-child{border-top:0}
+.cbx{display:flex;gap:12px;align-items:flex-start;flex:1;padding:10px 0;cursor:pointer}.cbx span{display:flex;flex-direction:column;gap:2px;font-size:14px}
+.cbx input{width:22px;height:22px;accent-color:var(--acc);flex-shrink:0;margin-top:1px}.cbx.solo{flex:0;padding:0}
+.struck{text-decoration:line-through;color:var(--muted)}
+.addrow{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
+.note{font-style:italic;margin-top:4px}
+.hiddendate{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+.code-row{margin-bottom:12px}
+.path{display:flex;gap:10px;align-items:stretch}
+.num{width:30px;height:30px;border-radius:50%;background:var(--hero);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;margin-top:14px}
+.num.soft{background:var(--tintc);color:var(--acc);margin-top:0}
+.clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.illus{height:130px;background:var(--hero);border-radius:24px;display:flex;align-items:center;justify-content:center;color:#fff}
+.lead{font-size:16px}.step{display:flex;gap:12px;align-items:flex-start}
+.glabel{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.06em;margin-top:10px}
+.seg{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.radio{flex:1;position:relative}.radio input{position:absolute;opacity:0}.radio span{display:block;text-align:center;padding:10px 6px;border-radius:12px;border:1.5px solid var(--line);font-weight:600;font-size:14px;cursor:pointer}
+.radio input:checked+span{background:var(--tintc);border-color:var(--acc);color:var(--acc)}
+.radio input:focus-visible+span{outline:2px solid var(--acc)}
+.switch input{width:44px;height:24px;accent-color:var(--acc)}
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:40px 10px}
+.toast{position:absolute;left:16px;right:16px;bottom:96px;background:#13305A;color:#fff;border-radius:14px;padding:12px 14px;font-size:13px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+#dlg{position:fixed;inset:0;background:rgba(3,10,22,.5);display:flex;align-items:center;justify-content:center;padding:20px;z-index:10}
+#dlg[hidden]{display:none}
+.dlg{background:#fff;color:#0B1F3A;border-radius:22px;padding:20px;width:100%;max-width:360px;display:flex;flex-direction:column;gap:12px}
+body[data-theme=dark] .dlg{background:#0F2440;color:#E8EEF6}
+.dlg h2{margin:0}.fl{display:flex;flex-direction:column;gap:4px;font-size:13px}.end-row{justify-content:flex-end}.end-row .btn{width:auto;height:44px}
+:focus-visible{outline:2px solid var(--turq);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="intro"><h1>SafarCare — app preview</h1><p>A clickable web copy of the app's screens, languages and ticket reader. Try a sample ticket on the Scan tab. Switch to Soomaali or العربية in Settings.</p></div>
+<div id="phone"></div>
+<div id="dlg" hidden></div>
+<script>
+const STRINGS = {"en": {"appName": "SafarCare", "tagline": "Travel Prepared. Travel Confident.", "greetingMorning": "Good morning", "greetingAfternoon": "Good afternoon", "greetingEvening": "Good evening", "guestName": "Traveller", "profile": "Profile", "notFound": "Not found", "cancel": "Cancel", "done": "Done", "delete": "Delete", "moreOptions": "More options", "leaveEmptyIfUnknown": "Leave empty if you don't know", "errNoInternet": "No internet connection. Check your connection and try again.", "month1": "Jan", "month2": "Feb", "month3": "Mar", "month4": "Apr", "month5": "May", "month6": "Jun", "month7": "Jul", "month8": "Aug", "month9": "Sep", "month10": "Oct", "month11": "Nov", "month12": "Dec", "weekday1": "Mon", "weekday2": "Tue", "weekday3": "Wed", "weekday4": "Thu", "weekday5": "Fri", "weekday6": "Sat", "weekday7": "Sun", "scanEyebrow": "Smart ticket scanner", "scanTitle": "Understand your ticket in seconds", "scanBody": "Screenshot, photo, PDF or WhatsApp image — we read the flight and baggage details for you.", "scanButton": "Scan My Ticket", "upcomingJourney": "Upcoming journey", "viewTrip": "View trip", "noTripTitle": "No upcoming trip yet", "noTripBody": "Scan your ticket and your next journey will appear here.", "myTrips": "My Trips", "travelRequirements": "Travel Requirements", "baggageChecker": "Baggage Checker", "travelChecklist": "Travel Checklist", "airportGuide": "Airport Guide", "travelTips": "Travel Tips", "navHome": "Home", "navTrips": "Trips", "navScan": "Scan ticket", "navRequirements": "Reminders", "navSettings": "Settings", "scanAddTitle": "Add your ticket", "scanAddBody": "An e-ticket screenshot, a photo of a printed ticket, a PDF, or an image someone sent you on WhatsApp.", "scanCamera": "Take a photo", "scanCameraSub": "Printed ticket or another screen", "scanGallery": "Choose from gallery", "scanGallerySub": "Screenshots and WhatsApp images", "scanFile": "Choose a file", "scanFileSub": "PDF e-ticket or booking confirmation", "scanReading": "Reading your ticket…", "scanPrivacy": "Your ticket is read on this phone. It is saved — encrypted — only if you tap Save to My Trips, and you can delete it any time.", "scanTips": "Tips: lay the ticket flat, use good light, and make sure all the text is in the picture.", "scanErrTitle": "We couldn't read this ticket", "scanErrUnreadable": "The picture is too blurry, dark or cut off. Try again in good light with the whole ticket in view, or use a screenshot.", "scanErrPdfNoText": "This PDF is a scanned picture with no text inside. Take a screenshot of the ticket and add the screenshot instead.", "scanErrPdfPassword": "This PDF is password protected. Open it, take a screenshot, and add the screenshot instead.", "scanErrUnsupported": "This file can't be opened. Use a PDF or a photo (JPG or PNG).", "scanErrTooLarge": "This file is too large. Use a screenshot instead.", "scanErrNotTicket": "This doesn't look like a flight ticket. Check you picked the right picture or file.", "scanErrFailed": "Something went wrong. Please try again. If you said no to camera or photo access, allow it in your phone settings.", "confirmTitle": "Check your details", "confirmSubtitle": "Tap any field to correct it", "confirmNothing": "There is no scanned ticket to check", "fieldPassenger": "Passenger", "fieldAirline": "Airline", "fieldBookingRef": "Booking reference", "fieldClass": "Class", "fieldFare": "Fare type", "fieldFlight": "Flight number", "fieldDeparture": "Departs", "fieldArrival": "Arrives", "fieldTerminal": "Terminal", "fieldGate": "Gate", "flightsTitle": "Flights", "flightsNone": "We couldn't find the flights on this ticket. Add them yourself below.", "flightAdd": "Add a flight", "flightRemove": "Remove this flight", "routeTitle": "Airports", "routeFrom": "From", "routeTo": "To", "airportCodeHint": "Use the 3-letter airport code", "airportCodeExample": "For example HGA, ADD, DXB", "saveToTrips": "Save to My Trips", "saveNeedsFlight": "Add at least one flight before saving.", "saveFailed": "Couldn't save the trip. Please try again.", "smartTitle": "Some details are missing", "smartBody": "Smart Reading can try to find them. Only the text of your ticket is sent — never the picture or file.", "smartButton": "Try Smart Reading", "smartUsed": "Smart Reading filled some gaps. Please check every detail before saving.", "smartFailed": "Smart Reading didn't work this time. You can enter the details yourself.", "smartLimit": "Smart Reading has been used a lot today. Please enter the details yourself.", "smartNeedsAccount": "Smart Reading needs a SafarCare account. Sign in from Settings.", "baggageTitle": "Baggage allowance", "checkedBaggage": "Checked baggage", "cabinBaggage": "Cabin baggage", "bagCouldNotConfirm": "We couldn't confirm your baggage allowance from this ticket. Please verify with your airline.", "bagConflict": "Unclear", "bagEnterMyself": "Enter it myself", "bagNoneTitle": "No checked bag", "bagPiecesKgTitle": "{n} × {kg} kg", "bagPiecesTitle": "{n} bag(s)", "bagTotalTitle": "{kg} kg in total", "checkedMeaningNone": "This ticket doesn't include a checked bag. Ask your airline before you go if you need one.", "checkedMeaningPiecesKg": "You can check in {n} bag(s). Each one must weigh {kg} kg or less.", "checkedMeaningPieces": "You can check in {n} bag(s). The weight limit per bag isn't shown on this ticket — ask your airline.", "checkedMeaningTotal": "Your checked bags together can weigh up to {kg} kg. The ticket doesn't say how many bags.", "cabinMeaningNone": "This ticket shows no cabin bag. Ask your airline what you can take on board.", "cabinMeaningPiecesKg": "You can take {n} bag(s) on board. Each one must weigh {kg} kg or less.", "cabinMeaningPieces": "You can take {n} bag(s) on board. The weight limit isn't shown on this ticket — ask your airline.", "cabinMeaningTotal": "Your bag on board can weigh up to {kg} kg.", "bagSourceTicket": "Read from your ticket as “{raw}”", "bagSourceManual": "Entered by you", "bagSourceSmart": "Found by Smart Reading (“{raw}”) — please check", "bagManualHelp": "Fill in what your airline told you or what is written on your ticket. Leave a box empty if you don't know.", "bagPiecesLabel": "Number of bags", "bagKgPerPieceLabel": "Kg per bag", "bagTotalKgLabel": "Total kg (if the ticket shows a total)", "bcNoTripTitle": "No ticket yet", "bcNoTripBody": "Scan your ticket to see your own baggage allowance. It can be different for every ticket, even on the same airline.", "bcCodesTitle": "What the codes on tickets mean", "bcCodePc": "PC means pieces (bags). 2PC = you can check in 2 bags.", "bcCodeKg": "KG on its own is a total weight. 30KG = all your checked bags together up to 30 kg.", "bcCodePcKg": "Bags and a weight together: 2 bags, each up to 23 kg.", "bcCodeNil": "No checked bag included.", "bcCabinNote": "Cabin bag rules (size and weight) are often printed separately. If you can't find them, ask your airline.", "bcDisclaimer": "Allowances depend on your airline, route, fare and ticket. Always check with your airline if you're unsure.", "tripsEmptyTitle": "No trips yet", "tripsEmptyBody": "Scan a ticket and save it. Your trips will be listed here.", "tripsUpcoming": "Upcoming", "tripsPast": "Previous trips", "tripsLoadError": "Couldn't load your trips. Please try again.", "tripNotFound": "This trip no longer exists", "viaStops": "via {stops}", "toCheck": "{n} to check", "bookingTitle": "Booking details", "viewTicket": "View ticket", "ticketOpenFailed": "This ticket file couldn't be opened", "tripCheckAirline": "Times and gates can change. Check with your airline on the day you travel.", "tripDelete": "Delete trip", "tripDeleteTitle": "Delete this trip?", "tripDeleteBody": "The trip, its checklist and the saved ticket file will be deleted from this phone and from your backup.", "ckDisclaimer": "These are reminders to help you prepare — not official requirements. Remove anything that doesn't apply to you.", "ckProgress": "{done} of {total} ready", "ckAdd": "Add your own item", "ckAddHint": "For example: Photocopy of passport", "ckEdit": "Edit item", "ck_passport": "Passport", "ck_passport_hint": "Have it with you and check the expiry date", "ck_ticket": "Flight ticket", "ck_ticket_hint": "Saved in SafarCare", "ck_visaCheck": "Visa requirements", "ck_visaCheck_hint": "Check with the embassy or immigration authority for {place}", "ck_transitDocuments": "Transit documents", "ck_transitDocuments_hint": "Ask your airline what you need to change planes in {stops}", "ck_hotel": "Hotel booking or address", "ck_hotel_hint": "If you have one, keep a copy", "ck_returnTicket": "Return or onward ticket", "ck_returnTicket_hint": "Check whether you will be asked for one", "ck_insurance": "Travel insurance", "ck_insurance_hint": "Check whether it is required for your trip", "ck_baggage": "Pack your bags", "ck_baggage_hint_unknown": "Confirm your allowance with your airline first", "ck_arrivalTime": "Plan when to reach the airport", "ck_arrivalTime_hint": "Ask your airline when check-in closes", "rqDisclaimer": "SafarCare doesn't decide whether you need a visa. Check each item with the embassy, the immigration authority or your airline.", "rq_passport_title": "Passport validity", "rq_passport_noDate": "Add your passport's expiry date to see how long it stays valid after your trip. Ask the embassy how long it must be valid.", "rq_passport_expires": "Your passport expires on {date}. Ask the embassy how long it must be valid.", "rq_passport_months": "Your passport expires on {date} — about {n} month(s) after your trip ends. Ask the embassy how long it must be valid.", "rq_passport_beforeEnd": "Your passport expires on {date}, before this trip ends. Contact your passport office.", "rq_passport_general": "Check when your passport expires. Many countries ask that it stays valid for some time after you arrive — the embassy can tell you how long.", "rq_visa_title": "Visa requirements", "rq_visa_body": "Check with the embassy or immigration authority of {place} whether you need a visa for this trip, and how to apply.", "rq_visa_general": "Check with the embassy or immigration authority of the country you are going to. Rules depend on your passport and the reason for your trip.", "rq_transit_title": "Transit documents", "rq_transit_body": "You change planes in {place}. Ask your airline or the embassy whether you need any documents for this connection.", "rq_transit_general": "If you change planes on the way, ask your airline whether you need any documents for the connection.", "rq_other_title": "Insurance and other documents", "rq_other_body": "Check whether travel insurance, a hotel booking, a return ticket, an invitation letter or a vaccination card will be asked for.", "rqAddExpiry": "Add expiry date", "rqChangeExpiry": "Change expiry date", "rqNote": "Your note", "rqAddNote": "Add a note", "rqEditNote": "Edit note", "rqMarkChecked": "Mark as checked: {item}", "rqMarkUnchecked": "Mark as not checked: {item}", "rqMyItems": "My own items", "rqMyItemsHint": "Your own items also appear in this trip's Travel Checklist.", "rqScanForTrip": "Scan a ticket for trip reminders", "guideIntro": "Your first international flight? Here is what happens at the airport, step by step.", "guideDeparting": "Leaving", "guideConnecting": "Changing planes", "guideArriving": "Arriving", "guideNext": "Next: {step}", "g_checkin_title": "Check-in and bag drop", "g_checkin_intro": "Check-in is where the airline confirms your seat and takes your big bags.", "g_checkin_s1": "Find your airline's name on the screens in the departure hall. They show which counter to go to.", "g_checkin_s2": "Give your passport and ticket (on paper or on your phone) to the airline staff.", "g_checkin_s3": "Put your checked bags on the scale. Keep money, medicine, documents and valuables in your hand luggage.", "g_checkin_s4": "You get a boarding pass and a baggage tag receipt. Keep both safe until you collect your bags.", "g_security_title": "Security screening", "g_security_intro": "Security checks that nothing dangerous is taken on the plane.", "g_security_s1": "Have your boarding pass ready. Put your bag, jacket, belt, phone and metal items in a tray.", "g_security_s2": "Liquids in your hand luggage must usually be in small bottles inside a clear bag. Big bottles are taken away.", "g_security_s3": "Walk through the scanner when the officer asks you. If it beeps, an officer may check you by hand.", "g_security_s4": "Collect all your things from the trays before you walk on.", "g_exitImmigration_title": "Passport control (leaving)", "g_exitImmigration_intro": "An officer checks your passport before you leave the country.", "g_exitImmigration_s1": "Join the queue and wait behind the line until you are called.", "g_exitImmigration_s2": "Give your passport and boarding pass. Answer questions calmly and simply.", "g_exitImmigration_s3": "The officer may stamp your passport. Check that you get it back.", "g_exitImmigration_s4": "You are now in the departure area. Do not leave it.", "g_gates_title": "Finding your gate", "g_gates_intro": "The gate is the door where you get on the plane. Its number is on your boarding pass and on the screens.", "g_gates_s1": "Look at the departure screens for your flight number. They show the gate and the boarding time.", "g_gates_s2": "Gates can change. Check the screens again and listen for announcements.", "g_gates_s3": "Go to your gate early. Some gates are a long walk away.", "g_gates_s4": "If you are lost, show your boarding pass to any airport staff member and ask.", "g_boarding_title": "Boarding the plane", "g_boarding_intro": "Boarding is when passengers get on the plane, usually in groups.", "g_boarding_s1": "Boarding often starts 30–60 minutes before departure. Be at the gate by the time on your boarding pass.", "g_boarding_s2": "Wait until your group or seat row is called.", "g_boarding_s3": "Show your boarding pass and passport. Staff scan your boarding pass.", "g_boarding_s4": "Find your seat number on the boarding pass. Cabin crew will help you.", "g_transit_title": "Changing planes (transit)", "g_transit_intro": "If you have a connecting flight, follow the transit signs — usually you don't go out of the airport.", "g_transit_s1": "When you get off the plane, look for signs that say \"Transfer\", \"Transit\" or \"Connecting flights\".", "g_transit_s2": "Check the screens for your next flight's gate. You may go through security again.", "g_transit_s3": "Ask your airline before you travel whether your bags go straight to your final airport, or whether you must collect them.", "g_transit_s4": "If you are worried about time, show your boarding pass to transfer staff and ask for help.", "g_arrivalImmigration_title": "Passport control (arriving)", "g_arrivalImmigration_intro": "When you land, an officer decides whether you can enter the country.", "g_arrivalImmigration_s1": "Follow the \"Arrivals\" or \"Immigration\" signs. Some countries have separate queues for citizens and visitors.", "g_arrivalImmigration_s2": "Have your passport, visa (if you need one) and any documents ready, such as a hotel booking or invitation letter.", "g_arrivalImmigration_s3": "Answer questions honestly: why you are visiting, how long you will stay, and where you will stay.", "g_arrivalImmigration_s4": "You may need to fill in an arrival card. Ask cabin crew for one on the plane.", "g_baggageClaim_title": "Collecting your bags", "g_baggageClaim_intro": "Your checked bags come out on a moving belt in the baggage hall.", "g_baggageClaim_s1": "Find your flight number on the screens. They show which belt your bags will come on.", "g_baggageClaim_s2": "Check the tag on your bag matches your baggage receipt. Many bags look alike.", "g_baggageClaim_s3": "If your bag doesn't arrive, go to the baggage service desk before you leave the hall. Show your receipt.", "g_baggageClaim_s4": "You may pass through customs. Follow the green line if you have nothing to declare, or the red line if you do.", "tip1_title": "Keep copies of your documents", "tip1_body": "Save photos of your passport, visa and ticket, and carry a paper copy apart from the originals.", "tip2_title": "Get to the airport early", "tip2_body": "International check-in can close an hour or more before departure. Ask your airline for the exact time.", "tip3_title": "Weigh your bags at home", "tip3_body": "Extra weight at the airport can be expensive. Check your allowance in SafarCare and weigh your bags before you leave.", "tip4_title": "Know what not to pack", "tip4_body": "Sharp items and large liquids can't go in hand luggage. Batteries and power banks must go in hand luggage, not checked bags.", "tip5_title": "Charge your phone", "tip5_body": "Your boarding pass may be on your phone. Charge it fully and carry a charger.", "tip6_title": "Carry some money", "tip6_body": "Have a small amount of money for transit airports. Not every place accepts the same cards.", "tip7_title": "Medicine in hand luggage", "tip7_body": "Keep medicine you need in your hand luggage with the prescription or a doctor's letter.", "tip8_title": "Ask for help", "tip8_body": "Airline and airport staff help travellers every day. Show your boarding pass and ask — it is normal.", "settings": "Settings", "sectionPreferences": "Preferences", "sectionAccount": "Account", "sectionAbout": "About", "language": "Language", "appearance": "Appearance", "themeSystem": "Same as phone", "themeLight": "Light", "themeDark": "Dark", "english": "English", "somali": "Soomaali", "arabic": "العربية", "notifications": "Trip reminders", "notifSettingHint": "A reminder one week and one day before you fly", "notifDenied": "Notifications are off for SafarCare. You can allow them in your phone settings.", "notifChannel": "Trip reminders", "notifChannelDesc": "Reminders before your flights", "notifWeekTitle": "One week until {route}", "notifWeekBody": "Check your travel requirements: passport, visa and transit documents.", "notifDayTitle": "Tomorrow: {route}", "notifDayBody": "Get your documents ready and check when check-in closes.", "privacy": "Privacy", "signIn": "Sign in or create account", "signInOptional": "Optional — back up your trips", "deleteAccount": "Delete account", "aboutSafarCare": "About SafarCare", "aboutBody": "SafarCare helps travellers understand their flights, baggage, documents and airport steps. It gives guidance only — always confirm important details with your airline or the relevant embassy.", "helpSupport": "Help and support", "terms": "Terms and conditions", "version": "Version", "account": "Account", "accountsOffTitle": "Accounts aren't available yet", "accountsOffBody": "This version of SafarCare isn't connected to the account service. Every travel tool still works and your trips are saved on this phone.", "authSignInTitle": "Sign in", "authCreateTitle": "Create your account", "authWhy": "An account is optional. It backs up your trips so you can get them back on a new phone.", "authName": "Your name", "authNameRequired": "Please enter your name", "authEmail": "Email", "authPassword": "Password", "authPasswordHelp": "At least 8 characters", "authPasswordAgain": "Enter your password again", "authShowPassword": "Show password", "authHidePassword": "Hide password", "authSignInButton": "Sign in", "authCreateButton": "Create account", "authForgot": "Forgot your password?", "authNoAccount": "New here? Create an account", "authHaveAccount": "Already have an account? Sign in", "authResetSent": "We sent a link to reset your password. Check your email.", "authResetNeedsEmail": "Type your email address first, then tap \"Forgot your password?\".", "authPrivacyNote": "Your password goes straight to our secure sign-in service. SafarCare never sees or stores it.", "authEditName": "Change name", "authErrEmail": "Please enter a valid email address", "authErrWeak": "The password needs at least 8 characters", "authErrCredentials": "The email or password is wrong", "authErrInUse": "There is already an account with this email. Try signing in.", "authErrDisabled": "This account has been switched off. Contact support.", "authErrTooMany": "Too many attempts. Please wait a few minutes and try again.", "authErrRecentLogin": "For your safety, please sign in again first.", "authErrGeneric": "Something went wrong. Please try again.", "verifyTitle": "Check your email", "verifyBody": "We sent a link to {email}. Tap it to confirm your email address, then come back here.", "verifyDone": "I've confirmed my email", "verifyNotYet": "Not confirmed yet. Tap the link in the email, then try again.", "verifyResend": "Send the email again", "verifyResent": "Email sent again", "signOut": "Sign out", "backupOn": "Your trip details are backed up. Ticket files and your passport date stay only on this phone.", "deleteAccountTitle": "Delete your account?", "deleteAccountBody": "Your account, your backed-up trips and the trips and tickets saved on this phone will be deleted. This can't be undone.", "deleteForever": "Delete for ever", "accountDeleted": "Your account has been deleted", "pv_read_title": "Your ticket is read on your phone", "pv_read_body": "Photos and PDFs are read on this phone. They are not uploaded to read them.", "pv_store_title": "Saved trips are encrypted", "pv_store_body": "Trips and ticket files you save are encrypted on this phone. The key is kept in your phone's secure storage.", "pv_cloud_title": "Backup is optional", "pv_cloud_body": "If you create an account, your trip details are backed up so only you can see them. Ticket files and your passport date are never uploaded.", "pv_smart_title": "Smart Reading only when you ask", "pv_smart_body": "If you tap Smart Reading, only the text of the ticket is sent to our secure service to find missing details. It is not stored there.", "pv_share_title": "Never shared", "pv_share_body": "Your documents are never shown to other users, sold, or used for advertising. SafarCare has no ads.", "pv_delete_title": "Delete any time", "pv_delete_body": "Delete one trip from its page, everything on this phone below, or your account from Account settings.", "pvDeleteAll": "Delete all data on this phone", "pvDeleteAllTitle": "Delete everything on this phone?", "pvDeleteAllBody": "All trips, checklists and ticket files saved on this phone will be deleted. Your account backup (if any) is not affected.", "pvDeleted": "All data on this phone has been deleted", "faq1_q": "Is SafarCare free?", "faq1_a": "Yes. SafarCare is free and has no advertisements.", "faq2_q": "Why does it say \"Not found\"?", "faq2_a": "Some tickets don't show every detail, or the picture isn't clear. SafarCare never guesses. Tap the field to enter it yourself, or ask your airline.", "faq3_q": "Can SafarCare tell me if I need a visa?", "faq3_a": "No. Visa rules depend on your passport and change often, so SafarCare reminds you to check with the embassy or immigration authority instead.", "faq4_q": "Do I need an account?", "faq4_a": "No. Every tool works without one. An account only backs up your trips.", "faq5_q": "My baggage allowance looks wrong", "faq5_a": "Tap it on your trip page to correct it. Your airline has the final word on your allowance.", "helpContact": "Need more help? Email {email}", "tm1_title": "Guidance only", "tm1_body": "SafarCare helps you understand your travel. It is not an airline, travel agent or government service.", "tm2_title": "Check important details", "tm2_body": "Always confirm flights, baggage, visas and documents with your airline and the relevant authorities. Entry to any country is decided by its officials.", "tm3_title": "Your responsibilities", "tm3_body": "Only scan tickets that belong to you or that you have permission to use. Keep your account details safe.", "tm4_title": "Your data", "tm4_body": "How your documents are processed and stored is explained in Privacy. You can delete your data at any time.", "tm5_title": "Changes", "tm5_body": "We may update the app and these terms. If something important changes, we will tell you in the app."}, "so": {"appName": "SafarCare", "tagline": "Safar diyaarsan. Safar kalsooni leh.", "greetingMorning": "Subax wanaagsan", "greetingAfternoon": "Galab wanaagsan", "greetingEvening": "Fiid wanaagsan", "guestName": "Musaafir", "profile": "Astaanta", "notFound": "Lama helin", "cancel": "Jooji", "done": "Dhammaad", "delete": "Tirtir", "moreOptions": "Doorashooyin kale", "leaveEmptyIfUnknown": "Banaan u daa haddii aadan garanayn", "errNoInternet": "Internet ma jiro. Hubi xiriirkaaga oo isku day mar kale.", "month1": "Jan", "month2": "Feb", "month3": "Mar", "month4": "Abr", "month5": "May", "month6": "Jun", "month7": "Lul", "month8": "Ogs", "month9": "Seb", "month10": "Okt", "month11": "Nof", "month12": "Dis", "weekday1": "Isn", "weekday2": "Tal", "weekday3": "Arb", "weekday4": "Kha", "weekday5": "Jim", "weekday6": "Sab", "weekday7": "Axd", "scanEyebrow": "Akhriyaha tigidhka", "scanTitle": "Fahan tigidhkaaga dhowr ilbiriqsi gudahood", "scanBody": "Sawir-shaashad, sawir, PDF ama sawir WhatsApp ah — annagaa kuu akhrinayna xogta duulimaadka iyo shandadaha.", "scanButton": "Iskaan garee tigidhkayga", "upcomingJourney": "Safarkaaga soo socda", "viewTrip": "Eeg safarka", "noTripTitle": "Weli safar soo socda ma jiro", "noTripBody": "Iskaan garee tigidhkaaga, safarkaaga xiga ayaa halkan ka soo muuqan doona.", "myTrips": "Safarradayda", "travelRequirements": "Shuruudaha safarka", "baggageChecker": "Hubi shandadaha", "travelChecklist": "Liiska safarka", "airportGuide": "Hagaha garoonka", "travelTips": "Talooyin safar", "navHome": "Hoyga", "navTrips": "Safarro", "navScan": "Iskaan garee tigidhka", "navRequirements": "Xusuusin", "navSettings": "Dejinta", "scanAddTitle": "Ku dar tigidhkaaga", "scanAddBody": "Sawir-shaashadda e-tigidhka, sawirka tigidh daabacan, PDF, ama sawir lagaaga soo diray WhatsApp.", "scanCamera": "Sawir qaad", "scanCameraSub": "Tigidh daabacan ama shaashad kale", "scanGallery": "Ka dooro sawirrada", "scanGallerySub": "Sawir-shaashadyo iyo sawirrada WhatsApp", "scanFile": "Dooro fayl", "scanFileSub": "E-tigidh PDF ah ama xaqiijinta ballanta", "scanReading": "Tigidhkaaga ayaa la akhrinayaa…", "scanPrivacy": "Tigidhkaaga waxaa lagu akhriyaa taleefankan. Waxaa la kaydiyaa — si qarsoon — kaliya haddii aad riixdo Ku kaydi Safarradayda, waadna tirtiri kartaa goor kasta.", "scanTips": "Talo: tigidhka si siman u dhig, iftiin wanaagsan isticmaal, hubina in qoraalka oo dhan uu sawirka ku jiro.", "scanErrTitle": "Ma aanan akhriyi karin tigidhkan", "scanErrUnreadable": "Sawirku aad buu u qallafsan yahay, u mugdi badan yahay ama wuu go'an yahay. Isku day mar kale iftiin wanaagsan oo tigidhka oo dhan muuqdo, ama isticmaal sawir-shaashad.", "scanErrPdfNoText": "PDF-kan waa sawir la iskaan gareeyay oo qoraal kuma jiro. Sawir-shaashad ka qaad tigidhka kuna dar sawirkaas.", "scanErrPdfPassword": "PDF-kan wuxuu leeyahay erey sir ah. Fur, sawir-shaashad ka qaad, kuna dar sawirkaas.", "scanErrUnsupported": "Faylkan lama furi karo. Isticmaal PDF ama sawir (JPG ama PNG).", "scanErrTooLarge": "Faylkan aad buu u weyn yahay. Isticmaal sawir-shaashad.", "scanErrNotTicket": "Tani uma eka tigidh duulimaad. Hubi inaad dooratay sawirka ama faylka saxda ah.", "scanErrFailed": "Wax baa khaldamay. Fadlan isku day mar kale. Haddii aad diiday kamaradda ama sawirrada, ka oggolow dejinta taleefankaaga.", "confirmTitle": "Hubi xogtaada", "confirmSubtitle": "Riix meel kasta si aad u saxdo", "confirmNothing": "Ma jiro tigidh la iskaan gareeyay oo la hubiyo", "fieldPassenger": "Rakaabka", "fieldAirline": "Shirkadda diyaaradda", "fieldBookingRef": "Lambarka ballanta", "fieldClass": "Heerka", "fieldFare": "Nooca qiimaha", "fieldFlight": "Lambarka duulimaadka", "fieldDeparture": "Ka ambabaxa", "fieldArrival": "Gaadha", "fieldTerminal": "Terminaal", "fieldGate": "Albaabka", "flightsTitle": "Duulimaadyada", "flightsNone": "Kuma aanan helin duulimaadyada tigidhkan. Hoos ku qor adiga.", "flightAdd": "Ku dar duulimaad", "flightRemove": "Ka saar duulimaadkan", "routeTitle": "Garoomada", "routeFrom": "Ka", "routeTo": "Ilaa", "airportCodeHint": "Isticmaal koodka garoonka ee 3-da xaraf ah", "airportCodeExample": "Tusaale HGA, ADD, DXB", "saveToTrips": "Ku kaydi Safarradayda", "saveNeedsFlight": "Ku dar ugu yaraan hal duulimaad ka hor intaadan kaydin.", "saveFailed": "Safarka lama kaydin karin. Fadlan isku day mar kale.", "smartTitle": "Xog qaar ayaa maqan", "smartBody": "Akhriska Casriga ah wuxuu isku dayi karaa inuu helo. Kaliya qoraalka tigidhkaaga ayaa la diraa — marnaba sawirka ama faylka.", "smartButton": "Isku day Akhriska Casriga ah", "smartUsed": "Akhriska Casriga ah wuxuu buuxiyay meelo qaar. Fadlan hubi xog kasta ka hor intaadan kaydin.", "smartFailed": "Akhriska Casriga ah ma shaqayn markan. Adigu waad qori kartaa xogta.", "smartLimit": "Akhriska Casriga ah si badan ayaa maanta loo isticmaalay. Fadlan adigu qor xogta.", "smartNeedsAccount": "Akhriska Casriga ah wuxuu u baahan yahay akoon SafarCare. Ka gal Dejinta.", "baggageTitle": "Xaddiga shandadaha", "checkedBaggage": "Shandadaha la dhiibo", "cabinBaggage": "Shandadda gacanta", "bagCouldNotConfirm": "Kama xaqiijin karin xaddiga shandadahaaga tigidhkan. Fadlan ka hubi shirkadda diyaaradda.", "bagConflict": "Ma cadda", "bagEnterMyself": "Anigu qor", "bagNoneTitle": "Shandad la dhiibo ma jirto", "bagPiecesKgTitle": "{n} × {kg} kg", "bagPiecesTitle": "{n} shandad", "bagTotalTitle": "{kg} kg wadar ahaan", "checkedMeaningNone": "Tigidhkani kuma jiro shandad la dhiibo. Haddii aad mid u baahan tahay, weydii shirkadda diyaaradda ka hor safarka.", "checkedMeaningPiecesKg": "Waxaad dhiibi kartaa {n} shandad. Mid kasta waa inuu ahaadaa {kg} kg ama ka yar.", "checkedMeaningPieces": "Waxaad dhiibi kartaa {n} shandad. Miisaanka ugu badan ee shandad kasta kuma qorna tigidhkan — weydii shirkadda diyaaradda.", "checkedMeaningTotal": "Shandadahaaga la dhiibo oo wadajir ah waxay noqon karaan ilaa {kg} kg. Tigidhku ma sheegayo inta shandad.", "cabinMeaningNone": "Tigidhkani ma muujinayo shandad gacan. Weydii shirkadda diyaaradda waxa aad la geli karto diyaaradda.", "cabinMeaningPiecesKg": "Waxaad diyaaradda la geli kartaa {n} shandad. Mid kasta waa inuu ahaadaa {kg} kg ama ka yar.", "cabinMeaningPieces": "Waxaad diyaaradda la geli kartaa {n} shandad. Miisaanka kuma qorna tigidhkan — weydii shirkadda diyaaradda.", "cabinMeaningTotal": "Shandadda aad diyaaradda la gasho waxay noqon kartaa ilaa {kg} kg.", "bagSourceTicket": "Waxaa laga akhriyay tigidhkaaga sida “{raw}”", "bagSourceManual": "Adiga ayaa qoray", "bagSourceSmart": "Akhriska Casriga ah ayaa helay (“{raw}”) — fadlan hubi", "bagManualHelp": "Qor waxa shirkadda diyaaraddu kuu sheegtay ama waxa ku qoran tigidhkaaga. Sanduuq banaan u daa haddii aadan garanayn.", "bagPiecesLabel": "Tirada shandadaha", "bagKgPerPieceLabel": "Kg shandad kasta", "bagTotalKgLabel": "Wadarta kg (haddii tigidhku muujiyo wadar)", "bcNoTripTitle": "Weli tigidh ma jiro", "bcNoTripBody": "Iskaan garee tigidhkaaga si aad u aragto xaddiga shandadahaaga. Tigidh kasta wuu ka duwanaan karaa, xitaa isla shirkad.", "bcCodesTitle": "Waxa koodhadka tigidhada ku qoran ay ka dhigan yihiin", "bcCodePc": "PC waa gabal (shandad). 2PC = waxaad dhiibi kartaa 2 shandad.", "bcCodeKg": "KG kaligeed waa miisaan wadar ah. 30KG = shandadahaaga la dhiibo oo dhan ilaa 30 kg.", "bcCodePcKg": "Shandado iyo miisaan wadajir: 2 shandad, mid kasta ilaa 23 kg.", "bcCodeNil": "Shandad la dhiibo kuma jirto.", "bcCabinNote": "Xeerarka shandadda gacanta (cabbirka iyo miisaanka) badanaa si gooni ah ayaa loo qoraa. Haddii aadan helin, weydii shirkadda diyaaradda.", "bcDisclaimer": "Xaddigu wuxuu ku xiran yahay shirkadda, wadada, qiimaha iyo tigidhkaaga. Had iyo jeer ka hubi shirkadda diyaaradda haddii aadan hubin.", "tripsEmptyTitle": "Weli safar ma jiro", "tripsEmptyBody": "Iskaan garee tigidh oo kaydi. Safarradaada halkan ayay ka muuqan doonaan.", "tripsUpcoming": "Soo socda", "tripsPast": "Safarradii hore", "tripsLoadError": "Safarradaada lama soo kicin karin. Fadlan isku day mar kale.", "tripNotFound": "Safarkan hadda ma jiro", "viaStops": "iyadoo maraysa {stops}", "toCheck": "{n} in la hubiyo", "bookingTitle": "Faahfaahinta ballanta", "viewTicket": "Eeg tigidhka", "ticketOpenFailed": "Faylka tigidhkan lama furi karin", "tripCheckAirline": "Saacadaha iyo albaabada way isbeddeli karaan. Ka hubi shirkadda diyaaradda maalinta aad safrayso.", "tripDelete": "Tirtir safarka", "tripDeleteTitle": "Ma tirtirtaa safarkan?", "tripDeleteBody": "Safarka, liiskiisa iyo faylka tigidhka la kaydiyay waa laga tirtiri doonaa taleefankan iyo kaydkaaga.", "ckDisclaimer": "Kuwani waa xusuusin kaa caawinaya inaad diyaargarowdo — ma aha shuruud rasmi ah. Ka saar wixii aan ku khusayn.", "ckProgress": "{done} ka mid ah {total} waa diyaar", "ckAdd": "Ku dar shay adiga kuu gaar ah", "ckAddHint": "Tusaale: Koobiga baasaboorka", "ckEdit": "Wax ka beddel", "ck_passport": "Baasaboor", "ck_passport_hint": "Haysto oo hubi taariikhda uu dhacayo", "ck_ticket": "Tigidhka duulimaadka", "ck_ticket_hint": "Waxaa lagu kaydiyay SafarCare", "ck_visaCheck": "Shuruudaha fiisaha", "ck_visaCheck_hint": "Ka hubi safaaradda ama hay'adda socdaalka ee {place}", "ck_transitDocuments": "Dukumentiyada transit-ka", "ck_transitDocuments_hint": "Weydii shirkadda diyaaradda waxa aad u baahan tahay si aad diyaarad ugu beddesho {stops}", "ck_hotel": "Ballanta hoteelka ama cinwaanka", "ck_hotel_hint": "Haddii aad leedahay, koobi haysto", "ck_returnTicket": "Tigidhka soo noqoshada ama sii socoshada", "ck_returnTicket_hint": "Hubi in lagaa weydiin doono", "ck_insurance": "Caymiska safarka", "ck_insurance_hint": "Hubi in safarkaagu u baahan yahay", "ck_baggage": "Diyaari shandadahaaga", "ck_baggage_hint_unknown": "Marka hore ka xaqiiji xaddiga shirkadda diyaaradda", "ck_arrivalTime": "Qorshee goorta aad garoonka gaadhayso", "ck_arrivalTime_hint": "Weydii shirkadda diyaaradda goorta check-in-ku xidhmayo", "rqDisclaimer": "SafarCare ma go'aamiso inaad fiiso u baahan tahay iyo in kale. Shay kasta ka hubi safaaradda, hay'adda socdaalka ama shirkadda diyaaradda.", "rq_passport_title": "Ansaxnimada baasaboorka", "rq_passport_noDate": "Ku dar taariikhda baasaboorkaagu dhacayo si aad u aragto inta uu ansax yahay safarka kadib. Weydii safaaradda inta uu waa inuu ansax ahaadaa.", "rq_passport_expires": "Baasaboorkaagu wuxuu dhacayaa {date}. Weydii safaaradda inta uu waa inuu ansax ahaadaa.", "rq_passport_months": "Baasaboorkaagu wuxuu dhacayaa {date} — qiyaastii {n} bilood kadib marka safarkaagu dhammaado. Weydii safaaradda inta uu waa inuu ansax ahaadaa.", "rq_passport_beforeEnd": "Baasaboorkaagu wuxuu dhacayaa {date}, ka hor inta safarkani dhammaan. La xiriir xafiiska baasaboorka.", "rq_passport_general": "Hubi goorta baasaboorkaagu dhacayo. Dalal badan waxay rabaan inuu ansax ahaado muddo kadib markaad gaadho — safaaraddu way kuu sheegi kartaa inta.", "rq_visa_title": "Shuruudaha fiisaha", "rq_visa_body": "Ka hubi safaaradda ama hay'adda socdaalka ee {place} inaad u baahan tahay fiiso safarkan iyo sida loo codsado.", "rq_visa_general": "Ka hubi safaaradda ama hay'adda socdaalka ee dalka aad u socoto. Xeerarku waxay ku xiran yihiin baasaboorkaaga iyo sababta safarka.", "rq_transit_title": "Dukumentiyada transit-ka", "rq_transit_body": "Waxaad diyaarad ku beddelaysaa {place}. Weydii shirkadda diyaaradda ama safaaradda inaad u baahan tahay dukumenti xiriirkan.", "rq_transit_general": "Haddii aad jidka diyaarad ku beddelayso, weydii shirkadda diyaaradda inaad u baahan tahay dukumenti xiriirka.", "rq_other_title": "Caymiska iyo dukumentiyo kale", "rq_other_body": "Hubi in lagaa weydiin doono caymis safar, ballan hoteel, tigidh soo noqosho, warqad casuumaad ama kaarka tallaalka.", "rqAddExpiry": "Ku dar taariikhda dhicitaanka", "rqChangeExpiry": "Beddel taariikhda dhicitaanka", "rqNote": "Qoraalkaaga", "rqAddNote": "Ku dar qoraal", "rqEditNote": "Wax ka beddel qoraalka", "rqMarkChecked": "Calaamadee waa la hubiyay: {item}", "rqMarkUnchecked": "Calaamadee lama hubin: {item}", "rqMyItems": "Waxyaabahayga gaarka ah", "rqMyItemsHint": "Waxyaabahaaga gaarka ah sidoo kale waxay ka muuqdaan Liiska safarka ee safarkan.", "rqScanForTrip": "Iskaan garee tigidh si aad u hesho xusuusinta safarka", "guideIntro": "Ma duulimaadkaagii ugu horreeyay ee caalami ah baa? Waa kan waxa garoonka ka dhaca, tallaabo tallaabo.", "guideDeparting": "Ka ambabaxa", "guideConnecting": "Beddelka diyaaradda", "guideArriving": "Gaadhista", "guideNext": "Xiga: {step}", "g_checkin_title": "Check-in iyo dhiibista shandadaha", "g_checkin_intro": "Check-in waa meesha shirkaddu ku xaqiijiso kursigaaga oo ay kaa qaadato shandadaha waaweyn.", "g_checkin_s1": "Ka raadi magaca shirkaddaada shaashadaha hoolka ambabaxa. Waxay muujiyaan miiska aad aadayso.", "g_checkin_s2": "Sii shaqaalaha shirkadda baasaboorkaaga iyo tigidhkaaga (warqad ama taleefan).", "g_checkin_s3": "Shandadaha la dhiibo saar miisaanka. Lacagta, daawada, dukumentiyada iyo waxyaabaha qaaliga ah ku hay shandadda gacanta.", "g_checkin_s4": "Waxaad heli doontaa boarding pass iyo rasiidka shandadaha. Labadaba si fiican u hay ilaa aad shandadahaaga ka qaadato.", "g_security_title": "Baaritaanka amniga", "g_security_intro": "Amnigu wuxuu hubiyaa in wax khatar ah aan diyaaradda la gelin.", "g_security_s1": "Diyaarso boarding pass-kaaga. Shandaddaada, jaakadda, suunka, taleefanka iyo biraha ku rid saxanka.", "g_security_s2": "Dareerayaasha shandadda gacanta badanaa waa inay ku jiraan dhalooyin yaryar oo ku jira bac cad. Dhalooyinka waaweyn waa laga qaadaa.", "g_security_s3": "Ka gudub iskaanka marka sarkaalku kuu sheego. Haddii uu dhawaaq sameeyo, sarkaal ayaa gacanta kaa baari kara.", "g_security_s4": "Ka soo qaado wixii aad lahayd oo dhan saxamada ka hor intaadan socon.", "g_exitImmigration_title": "Hubinta baasaboorka (ka bixitaanka)", "g_exitImmigration_intro": "Sarkaal ayaa hubiya baasaboorkaaga ka hor intaadan dalka ka bixin.", "g_exitImmigration_s1": "Saf gal oo ka sug xariiqda gadaasheeda ilaa lagu yeedho.", "g_exitImmigration_s2": "Sii baasaboorkaaga iyo boarding pass-ka. Su'aalaha si deggan oo fudud uga jawaab.", "g_exitImmigration_s3": "Sarkaalku wuxuu shaabad ku dhufan karaa baasaboorkaaga. Hubi in lagu soo celiyo.", "g_exitImmigration_s4": "Hadda waxaad joogtaa aagga ambabaxa. Ha ka bixin.", "g_gates_title": "Helitaanka albaabkaaga", "g_gates_intro": "Albaabku waa meesha laga fuulo diyaaradda. Lambarkiisu wuxuu ku qoran yahay boarding pass-ka iyo shaashadaha.", "g_gates_s1": "Shaashadaha ambabaxa ka eeg lambarka duulimaadkaaga. Waxay muujiyaan albaabka iyo waqtiga fuulista.", "g_gates_s2": "Albaabadu way isbeddeli karaan. Mar kale eeg shaashadaha oo dhegeyso ogeysiisyada.", "g_gates_s3": "Goor hore u tag albaabkaaga. Albaabada qaar way fog yihiin.", "g_gates_s4": "Haddii aad lumto, tus boarding pass-kaaga shaqaale kasta oo garoonka ah oo weydii.", "g_boarding_title": "Fuulista diyaaradda", "g_boarding_intro": "Fuulistu waa marka rakaabku diyaaradda galaan, badanaa koox koox.", "g_boarding_s1": "Fuulistu badanaa waxay bilaabataa 30–60 daqiiqo ka hor ambabaxa. Albaabka joog waqtiga ku qoran boarding pass-ka.", "g_boarding_s2": "Sug ilaa kooxdaada ama safka kursigaaga lagu yeedho.", "g_boarding_s3": "Tus boarding pass-ka iyo baasaboorka. Shaqaaluhu waxay iskaan gareeyaan boarding pass-kaaga.", "g_boarding_s4": "Lambarka kursigaaga ka hel boarding pass-ka. Shaqaalaha diyaaradda ayaa ku caawin doona.", "g_transit_title": "Beddelka diyaaradda (transit)", "g_transit_intro": "Haddii aad leedahay duulimaad xiriir ah, raac calaamadaha transit-ka — badanaa garoonka kama baxdid.", "g_transit_s1": "Markaad diyaaradda ka degto, raadi calaamadaha \"Transfer\", \"Transit\" ama \"Connecting flights\".", "g_transit_s2": "Shaashadaha ka eeg albaabka duulimaadkaaga xiga. Mar kale ayaa laga yaabaa inaad amniga marto.", "g_transit_s3": "Ka hor safarka weydii shirkadda in shandadahaagu toos u aadayaan garoonkaaga ugu dambeeya, ama waa inaad soo qaadato.", "g_transit_s4": "Haddii waqtigu kaa walwal geliyo, tus boarding pass-ka shaqaalaha transfer-ka oo caawimaad weydii.", "g_arrivalImmigration_title": "Hubinta baasaboorka (gaadhista)", "g_arrivalImmigration_intro": "Markaad dagto, sarkaal ayaa go'aamiya inaad dalka geli karto.", "g_arrivalImmigration_s1": "Raac calaamadaha \"Arrivals\" ama \"Immigration\". Dalal qaar waxay leeyihiin saf gooni ah muwaadiniinta iyo booqdayaasha.", "g_arrivalImmigration_s2": "Diyaarso baasaboorkaaga, fiisaha (haddii aad u baahan tahay) iyo dukumentiyada sida ballanta hoteelka ama warqadda casuumaadda.", "g_arrivalImmigration_s3": "Si daacad ah uga jawaab su'aalaha: sababta booqashadaada, inta aad joogayso, iyo meesha aad degayso.", "g_arrivalImmigration_s4": "Waxaa laga yaabaa inaad buuxiso kaarka gaadhista. Ka weydii shaqaalaha diyaaradda.", "g_baggageClaim_title": "Qaadashada shandadahaaga", "g_baggageClaim_intro": "Shandadahaaga la dhiibay waxay ku soo baxaan suun socda oo ku yaal hoolka shandadaha.", "g_baggageClaim_s1": "Shaashadaha ka hel lambarka duulimaadkaaga. Waxay muujiyaan suunka shandadahaagu ku iman doonaan.", "g_baggageClaim_s2": "Hubi in calaamadda shandaddaadu la mid tahay rasiidkaaga. Shandado badan way isu eg yihiin.", "g_baggageClaim_s3": "Haddii shandaddaadu iman weydo, tag miiska adeegga shandadaha ka hor intaadan hoolka ka bixin. Tus rasiidkaaga.", "g_baggageClaim_s4": "Waxaa laga yaabaa inaad marto kastamka. Raac khadka cagaaran haddii aadan wax sheegid lahayn, ama khadka casaan haddii aad leedahay.", "tip1_title": "Haysto koobiyada dukumentiyadaada", "tip1_body": "Kaydi sawirrada baasaboorkaaga, fiisaha iyo tigidhka, oo koobi warqad ah ka fogee kuwa asalka ah.", "tip2_title": "Goor hore garoonka tag", "tip2_body": "Check-in-ka caalamiga ah wuxuu xidhmi karaa saacad ama ka badan ka hor ambabaxa. Weydii shirkadda waqtiga saxda ah.", "tip3_title": "Guriga ku miisaan shandadahaaga", "tip3_body": "Miisaan dheeraad ah garoonka qaali ayuu noqon karaa. Ka eeg xaddigaaga SafarCare oo miisaan shandadaha ka hor intaadan bixin.", "tip4_title": "Ogow waxa aan la xirxiran", "tip4_body": "Alaabta afka leh iyo dareerayaasha waaweyn lama gelin karo shandadda gacanta. Baytariyada iyo power bank-ku waa inay ku jiraan shandadda gacanta, ma aha kuwa la dhiibo.", "tip5_title": "Dallac taleefankaaga", "tip5_body": "Boarding pass-kaagu wuxuu ku jiri karaa taleefankaaga. Si buuxda u dallac oo charger qaado.", "tip6_title": "Lacag yar qaado", "tip6_body": "Haysato lacag yar garoomada transit-ka. Meel kasta ma aqbasho kaararka isku midka ah.", "tip7_title": "Daawada shandadda gacanta", "tip7_body": "Daawada aad u baahan tahay ku hay shandadda gacanta, iyadoo ay la socoto warqadda dhakhtarka.", "tip8_title": "Caawimaad weydii", "tip8_body": "Shaqaalaha shirkadda iyo garoonka maalin kasta ayay caawiyaan musaafiriinta. Tus boarding pass-kaaga oo weydii — waa caadi.", "settings": "Dejinta", "sectionPreferences": "Doorashooyinka", "sectionAccount": "Akoonka", "sectionAbout": "Ku saabsan", "language": "Luqadda", "appearance": "Muuqaalka", "themeSystem": "Sida taleefanka", "themeLight": "Iftiin", "themeDark": "Mugdi", "english": "English", "somali": "Soomaali", "arabic": "العربية", "notifications": "Xusuusinta safarka", "notifSettingHint": "Xusuusin hal toddobaad iyo hal maalin ka hor duulimaadkaaga", "notifDenied": "Ogeysiisyada SafarCare way xiran yihiin. Waxaad ka oggolaan kartaa dejinta taleefankaaga.", "notifChannel": "Xusuusinta safarka", "notifChannelDesc": "Xusuusin ka hor duulimaadyadaada", "notifWeekTitle": "Hal toddobaad ka hor {route}", "notifWeekBody": "Hubi shuruudaha safarkaaga: baasaboorka, fiisaha iyo dukumentiyada transit-ka.", "notifDayTitle": "Berri: {route}", "notifDayBody": "Diyaarso dukumentiyadaada oo hubi goorta check-in-ku xidhmayo.", "privacy": "Ilaalinta xogta", "signIn": "Gal ama samee akoon", "signInOptional": "Ikhtiyaari — kaydi safarradaada", "deleteAccount": "Tirtir akoonka", "aboutSafarCare": "Ku saabsan SafarCare", "aboutBody": "SafarCare waxay musaafiriinta ka caawisaa inay fahmaan duulimaadkooda, shandadahooda, dukumentiyadooda iyo tallaabooyinka garoonka. Waa hage kaliya — had iyo jeer xaqiiji xogta muhiimka ah shirkadda diyaaradda ama safaaradda khuseysa.", "helpSupport": "Caawimaad iyo taageero", "terms": "Shuruudaha iyo xaaladaha", "version": "Nooca", "account": "Akoonka", "accountsOffTitle": "Akoonnada weli lama heli karo", "accountsOffBody": "Noocan SafarCare kuma xirna adeegga akoonnada. Qalab kasta oo safar wuu shaqeeyaa, safarradaaduna waxay ku kaydsan yihiin taleefankan.", "authSignInTitle": "Gal", "authCreateTitle": "Samee akoonkaaga", "authWhy": "Akoonku waa ikhtiyaari. Wuxuu kaydiyaa safarradaada si aad ugu soo celiso taleefan cusub.", "authName": "Magacaaga", "authNameRequired": "Fadlan qor magacaaga", "authEmail": "Iimayl", "authPassword": "Erey sireed", "authPasswordHelp": "Ugu yaraan 8 xaraf", "authPasswordAgain": "Mar kale qor ereyga sirta", "authShowPassword": "Muuji ereyga sirta", "authHidePassword": "Qari ereyga sirta", "authSignInButton": "Gal", "authCreateButton": "Samee akoon", "authForgot": "Ma ilowday ereyga sirta?", "authNoAccount": "Cusub? Samee akoon", "authHaveAccount": "Akoon ma leedahay? Gal", "authResetSent": "Waxaan kuu dirnay xiriiriye aad ku beddesho ereyga sirta. Hubi iimaylkaaga.", "authResetNeedsEmail": "Marka hore qor iimaylkaaga, kadibna riix \"Ma ilowday ereyga sirta?\".", "authPrivacyNote": "Ereyga sirtaadu wuxuu si toos ah u aadaa adeegga galitaanka ee aaminka ah. SafarCare marnaba ma arkto mana kaydiso.", "authEditName": "Beddel magaca", "authErrEmail": "Fadlan qor iimayl sax ah", "authErrWeak": "Ereyga sirtu wuxuu u baahan yahay ugu yaraan 8 xaraf", "authErrCredentials": "Iimaylka ama ereyga sirtu waa khalad", "authErrInUse": "Iimaylkan akoon horey ayuu u leeyahay. Isku day inaad gasho.", "authErrDisabled": "Akoonkan waa la damiyay. La xiriir taageerada.", "authErrTooMany": "Isku day badan. Fadlan sug dhowr daqiiqo oo mar kale isku day.", "authErrRecentLogin": "Badbaadadaada awgeed, fadlan marka hore mar kale gal.", "authErrGeneric": "Wax baa khaldamay. Fadlan isku day mar kale.", "verifyTitle": "Hubi iimaylkaaga", "verifyBody": "Waxaan xiriiriye u dirnay {email}. Riix si aad u xaqiijiso iimaylkaaga, kadib halkan ku soo noqo.", "verifyDone": "Waan xaqiijiyay iimaylkayga", "verifyNotYet": "Weli lama xaqiijin. Riix xiriiriyaha iimaylka, kadib mar kale isku day.", "verifyResend": "Mar kale dir iimaylka", "verifyResent": "Iimaylka mar kale ayaa la diray", "signOut": "Ka bax", "backupOn": "Xogta safarradaada waa la kaydiyay. Faylasha tigidhka iyo taariikhda baasaboorkaagu waxay ku jiraan taleefankan kaliya.", "deleteAccountTitle": "Ma tirtirtaa akoonkaaga?", "deleteAccountBody": "Akoonkaaga, safarradaada la kaydiyay iyo safarrada iyo tigidhada taleefankan ku jira waa la tirtiri doonaa. Tan dib looma celin karo.", "deleteForever": "Tirtir weligeed", "accountDeleted": "Akoonkaaga waa la tirtiray", "pv_read_title": "Tigidhkaaga waxaa lagu akhriyaa taleefankaaga", "pv_read_body": "Sawirrada iyo PDF-yada waxaa lagu akhriyaa taleefankan. Looma diro meel kale si loo akhriyo.", "pv_store_title": "Safarrada la kaydiyay waa qarsoon yihiin", "pv_store_body": "Safarrada iyo faylasha tigidhka aad kaydiso waa la qarsoodiyaa taleefankan. Furaha waxaa lagu hayaa kaydka aaminka ah ee taleefankaaga.", "pv_cloud_title": "Kaydku waa ikhtiyaari", "pv_cloud_body": "Haddii aad akoon samayso, xogta safarradaada waa la kaydiyaa si adiga kaliya aad u aragto. Faylasha tigidhka iyo taariikhda baasaboorka marnaba lama diro.", "pv_smart_title": "Akhriska Casriga ah kaliya markaad codsato", "pv_smart_body": "Haddii aad riixdo Akhriska Casriga ah, kaliya qoraalka tigidhka ayaa loo diraa adeeggayaga aaminka ah si loo helo xogta maqan. Halkaas laguma kaydiyo.", "pv_share_title": "Marnaba lama wadaago", "pv_share_body": "Dukumentiyadaada marnaba laguma tuso isticmaaleyaal kale, lama iibiyo, xayeysiisna looma isticmaalo. SafarCare xayeysiis ma leh.", "pv_delete_title": "Tirtir goor kasta", "pv_delete_body": "Ka tirtir hal safar boggiisa, wax kasta oo taleefankan ku jira hoos, ama akoonkaaga dejinta Akoonka.", "pvDeleteAll": "Tirtir dhammaan xogta taleefankan", "pvDeleteAllTitle": "Ma tirtirtaa wax kasta oo taleefankan ku jira?", "pvDeleteAllBody": "Dhammaan safarrada, liisaska iyo faylasha tigidhka ee taleefankan ku kaydsan waa la tirtiri doonaa. Kaydka akoonkaaga (haddii uu jiro) wax kama gaadhayo.", "pvDeleted": "Dhammaan xogta taleefankan waa la tirtiray", "faq1_q": "SafarCare ma bilaash baa?", "faq1_a": "Haa. SafarCare waa bilaash, xayeysiisna ma leh.", "faq2_q": "Maxay u leedahay \"Lama helin\"?", "faq2_a": "Tigidhada qaar ma muujiyaan xog kasta, ama sawirku ma cadda. SafarCare marnaba ma qiyaasto. Riix meesha si aad adigu u qorto, ama weydii shirkadda diyaaradda.", "faq3_q": "SafarCare ma ii sheegi kartaa inaan fiiso u baahanahay?", "faq3_a": "Maya. Xeerarka fiisaha waxay ku xiran yihiin baasaboorkaaga oo si joogto ah ayay isu beddelaan, sidaa darteed SafarCare waxay kuu xusuusinaysaa inaad ka hubiso safaaradda ama hay'adda socdaalka.", "faq4_q": "Ma u baahanahay akoon?", "faq4_a": "Maya. Qalab kasta wuu shaqeeyaa la'aantiis. Akoonku kaliya wuxuu kaydiyaa safarradaada.", "faq5_q": "Xaddiga shandadahaygu wuxuu u eg yahay khalad", "faq5_a": "Ku riix bogga safarkaaga si aad u saxdo. Shirkadda diyaaradda ayaa leh go'aanka ugu dambeeya ee xaddigaaga.", "helpContact": "Caawimaad dheeraad ah? Iimayl u dir {email}", "tm1_title": "Hage kaliya", "tm1_body": "SafarCare waxay kaa caawisaa inaad fahamto safarkaaga. Ma aha shirkad diyaaradeed, wakiil safar ama adeeg dowladeed.", "tm2_title": "Hubi xogta muhiimka ah", "tm2_body": "Had iyo jeer ka xaqiiji duulimaadyada, shandadaha, fiisaha iyo dukumentiyada shirkadda diyaaradda iyo hay'adaha khuseeya. Gelitaanka dal kasta waxaa go'aamiya saraakiishiisa.", "tm3_title": "Waajibaadkaaga", "tm3_body": "Kaliya iskaan garee tigidhada adiga kuu gaar ah ama aad ogolaansho u haysato. Xogta akoonkaaga si aamin ah u hay.", "tm4_title": "Xogtaada", "tm4_body": "Sida dukumentiyadaada loo akhriyo loona kaydiyo waxaa lagu sharxay Ilaalinta xogta. Xogtaada waad tirtiri kartaa goor kasta.", "tm5_title": "Isbeddello", "tm5_body": "Waxaan cusboonaysiin karnaa app-ka iyo shuruudahan. Haddii wax muhiim ahi isbeddelaan, waxaan kuugu sheegi doonaa app-ka gudihiisa."}, "ar": {"appName": "SafarCare", "tagline": "سافر مستعدًا. سافر بثقة.", "greetingMorning": "صباح الخير", "greetingAfternoon": "مساء الخير", "greetingEvening": "مساء الخير", "guestName": "مسافر", "profile": "الملف الشخصي", "notFound": "غير موجود", "cancel": "إلغاء", "done": "تم", "delete": "حذف", "moreOptions": "خيارات أخرى", "leaveEmptyIfUnknown": "اتركه فارغًا إن كنت لا تعرف", "errNoInternet": "لا يوجد اتصال بالإنترنت. تحقّق من الاتصال وحاول مرة أخرى.", "month1": "يناير", "month2": "فبراير", "month3": "مارس", "month4": "أبريل", "month5": "مايو", "month6": "يونيو", "month7": "يوليو", "month8": "أغسطس", "month9": "سبتمبر", "month10": "أكتوبر", "month11": "نوفمبر", "month12": "ديسمبر", "weekday1": "الإثنين", "weekday2": "الثلاثاء", "weekday3": "الأربعاء", "weekday4": "الخميس", "weekday5": "الجمعة", "weekday6": "السبت", "weekday7": "الأحد", "scanEyebrow": "الماسح الذكي للتذاكر", "scanTitle": "افهم تذكرتك في ثوانٍ", "scanBody": "لقطة شاشة أو صورة أو ملف PDF أو صورة من واتساب — نقرأ لك تفاصيل الرحلة والأمتعة.", "scanButton": "امسح تذكرتي", "upcomingJourney": "رحلتك القادمة", "viewTrip": "عرض الرحلة", "noTripTitle": "لا توجد رحلة قادمة بعد", "noTripBody": "امسح تذكرتك وستظهر رحلتك القادمة هنا.", "myTrips": "رحلاتي", "travelRequirements": "متطلبات السفر", "baggageChecker": "فحص الأمتعة", "travelChecklist": "قائمة السفر", "airportGuide": "دليل المطار", "travelTips": "نصائح السفر", "navHome": "الرئيسية", "navTrips": "الرحلات", "navScan": "امسح التذكرة", "navRequirements": "التذكيرات", "navSettings": "الإعدادات", "scanAddTitle": "أضف تذكرتك", "scanAddBody": "لقطة شاشة لتذكرة إلكترونية، أو صورة لتذكرة مطبوعة، أو ملف PDF، أو صورة أرسلها لك أحد على واتساب.", "scanCamera": "التقط صورة", "scanCameraSub": "تذكرة مطبوعة أو شاشة أخرى", "scanGallery": "اختر من المعرض", "scanGallerySub": "لقطات الشاشة وصور واتساب", "scanFile": "اختر ملفًا", "scanFileSub": "تذكرة إلكترونية PDF أو تأكيد الحجز", "scanReading": "جارٍ قراءة تذكرتك…", "scanPrivacy": "تُقرأ تذكرتك على هذا الهاتف. ولا تُحفظ — مشفّرة — إلا إذا ضغطت «احفظ في رحلاتي»، ويمكنك حذفها في أي وقت.", "scanTips": "نصيحة: ضع التذكرة مستوية، واستخدم إضاءة جيدة، وتأكد أن النص كله ظاهر في الصورة.", "scanErrTitle": "لم نتمكّن من قراءة هذه التذكرة", "scanErrUnreadable": "الصورة غير واضحة أو مظلمة أو مقطوعة. حاول مرة أخرى في إضاءة جيدة مع ظهور التذكرة كاملة، أو استخدم لقطة شاشة.", "scanErrPdfNoText": "ملف PDF هذا صورة ممسوحة بلا نص. التقط لقطة شاشة للتذكرة وأضفها بدلًا منه.", "scanErrPdfPassword": "ملف PDF هذا محمي بكلمة مرور. افتحه والتقط لقطة شاشة وأضفها بدلًا منه.", "scanErrUnsupported": "لا يمكن فتح هذا الملف. استخدم ملف PDF أو صورة (JPG أو PNG).", "scanErrTooLarge": "هذا الملف كبير جدًا. استخدم لقطة شاشة بدلًا منه.", "scanErrNotTicket": "لا يبدو هذا تذكرة طيران. تأكد أنك اخترت الصورة أو الملف الصحيح.", "scanErrFailed": "حدث خطأ ما. حاول مرة أخرى. إن رفضت الوصول إلى الكاميرا أو الصور، اسمح به من إعدادات الهاتف.", "confirmTitle": "تحقّق من بياناتك", "confirmSubtitle": "اضغط على أي حقل لتصحيحه", "confirmNothing": "لا توجد تذكرة ممسوحة للتحقق منها", "fieldPassenger": "المسافر", "fieldAirline": "شركة الطيران", "fieldBookingRef": "رقم الحجز", "fieldClass": "الدرجة", "fieldFare": "نوع السعر", "fieldFlight": "رقم الرحلة", "fieldDeparture": "المغادرة", "fieldArrival": "الوصول", "fieldTerminal": "المبنى", "fieldGate": "البوابة", "flightsTitle": "الرحلات", "flightsNone": "لم نجد الرحلات في هذه التذكرة. أضفها بنفسك أدناه.", "flightAdd": "أضف رحلة", "flightRemove": "احذف هذه الرحلة", "routeTitle": "المطارات", "routeFrom": "من", "routeTo": "إلى", "airportCodeHint": "استخدم رمز المطار المكوّن من 3 أحرف", "airportCodeExample": "مثل HGA أو ADD أو DXB", "saveToTrips": "احفظ في رحلاتي", "saveNeedsFlight": "أضف رحلة واحدة على الأقل قبل الحفظ.", "saveFailed": "تعذّر حفظ الرحلة. حاول مرة أخرى.", "smartTitle": "بعض التفاصيل ناقصة", "smartBody": "يمكن للقراءة الذكية محاولة العثور عليها. يُرسل نص التذكرة فقط — وليس الصورة أو الملف أبدًا.", "smartButton": "جرّب القراءة الذكية", "smartUsed": "أكملت القراءة الذكية بعض الفراغات. تحقّق من كل التفاصيل قبل الحفظ.", "smartFailed": "لم تنجح القراءة الذكية هذه المرة. يمكنك إدخال التفاصيل بنفسك.", "smartLimit": "استُخدمت القراءة الذكية كثيرًا اليوم. أدخل التفاصيل بنفسك من فضلك.", "smartNeedsAccount": "تحتاج القراءة الذكية إلى حساب في SafarCare. سجّل الدخول من الإعدادات.", "baggageTitle": "وزن الأمتعة المسموح", "checkedBaggage": "الأمتعة المسجّلة", "cabinBaggage": "حقيبة المقصورة", "bagCouldNotConfirm": "لم نتمكّن من تأكيد الأمتعة المسموح بها من هذه التذكرة. يُرجى التحقق من شركة الطيران.", "bagConflict": "غير واضح", "bagEnterMyself": "سأدخلها بنفسي", "bagNoneTitle": "لا توجد أمتعة مسجّلة", "bagPiecesKgTitle": "{n} × {kg} كغ", "bagPiecesTitle": "عدد الحقائب: {n}", "bagTotalTitle": "{kg} كغ إجمالًا", "checkedMeaningNone": "لا تشمل هذه التذكرة حقيبة مسجّلة. اسأل شركة الطيران قبل السفر إن كنت تحتاج إليها.", "checkedMeaningPiecesKg": "يمكنك تسجيل {n} حقيبة/حقائب. يجب ألا يزيد وزن كل واحدة على {kg} كغ.", "checkedMeaningPieces": "يمكنك تسجيل {n} حقيبة/حقائب. الحد الأقصى لوزن كل حقيبة غير مذكور في التذكرة — اسأل شركة الطيران.", "checkedMeaningTotal": "يمكن أن يصل الوزن الإجمالي لحقائبك المسجّلة إلى {kg} كغ. لا تذكر التذكرة عدد الحقائب.", "cabinMeaningNone": "لا تُظهر هذه التذكرة حقيبة مقصورة. اسأل شركة الطيران عمّا يمكنك أخذه معك إلى الطائرة.", "cabinMeaningPiecesKg": "يمكنك أخذ {n} حقيبة/حقائب إلى الطائرة. يجب ألا يزيد وزن كل واحدة على {kg} كغ.", "cabinMeaningPieces": "يمكنك أخذ {n} حقيبة/حقائب إلى الطائرة. الوزن المسموح غير مذكور في التذكرة — اسأل شركة الطيران.", "cabinMeaningTotal": "يمكن أن يصل وزن حقيبتك في المقصورة إلى {kg} كغ.", "bagSourceTicket": "قُرئت من تذكرتك هكذا: «{raw}»", "bagSourceManual": "أدخلتها أنت", "bagSourceSmart": "وجدتها القراءة الذكية («{raw}») — يُرجى التحقق", "bagManualHelp": "أدخل ما أخبرتك به شركة الطيران أو ما هو مكتوب في تذكرتك. اترك الخانة فارغة إن كنت لا تعرف.", "bagPiecesLabel": "عدد الحقائب", "bagKgPerPieceLabel": "كغ لكل حقيبة", "bagTotalKgLabel": "إجمالي الكيلوغرامات (إن ذكرت التذكرة إجماليًا)", "bcNoTripTitle": "لا توجد تذكرة بعد", "bcNoTripBody": "امسح تذكرتك لترى الأمتعة المسموح بها لك. قد تختلف من تذكرة لأخرى حتى مع نفس الشركة.", "bcCodesTitle": "معنى الرموز في التذاكر", "bcCodePc": "PC تعني قطعة (حقيبة). 2PC = يمكنك تسجيل حقيبتين.", "bcCodeKg": "KG وحدها تعني وزنًا إجماليًا. 30KG = كل حقائبك المسجّلة معًا حتى 30 كغ.", "bcCodePcKg": "حقائب ووزن معًا: حقيبتان، كل واحدة حتى 23 كغ.", "bcCodeNil": "لا تشمل التذكرة حقيبة مسجّلة.", "bcCabinNote": "قواعد حقيبة المقصورة (الحجم والوزن) تُكتب غالبًا بشكل منفصل. إن لم تجدها فاسأل شركة الطيران.", "bcDisclaimer": "تعتمد الأمتعة المسموح بها على شركة الطيران والمسار والسعر والتذكرة. تحقّق دائمًا من شركة الطيران إن لم تكن متأكدًا.", "tripsEmptyTitle": "لا توجد رحلات بعد", "tripsEmptyBody": "امسح تذكرة واحفظها. ستظهر رحلاتك هنا.", "tripsUpcoming": "القادمة", "tripsPast": "الرحلات السابقة", "tripsLoadError": "تعذّر تحميل رحلاتك. حاول مرة أخرى.", "tripNotFound": "هذه الرحلة لم تعد موجودة", "viaStops": "عبر {stops}", "toCheck": "{n} للتحقق", "bookingTitle": "تفاصيل الحجز", "viewTicket": "عرض التذكرة", "ticketOpenFailed": "تعذّر فتح ملف التذكرة", "tripCheckAirline": "قد تتغير الأوقات والبوابات. تحقّق من شركة الطيران يوم السفر.", "tripDelete": "حذف الرحلة", "tripDeleteTitle": "حذف هذه الرحلة؟", "tripDeleteBody": "ستُحذف الرحلة وقائمتها وملف التذكرة المحفوظ من هذا الهاتف ومن النسخة الاحتياطية.", "ckDisclaimer": "هذه تذكيرات لمساعدتك على الاستعداد — وليست متطلبات رسمية. احذف ما لا ينطبق عليك.", "ckProgress": "{done} من {total} جاهزة", "ckAdd": "أضف عنصرًا خاصًا بك", "ckAddHint": "مثال: نسخة من جواز السفر", "ckEdit": "تعديل العنصر", "ck_passport": "جواز السفر", "ck_passport_hint": "احمله معك وتحقّق من تاريخ انتهائه", "ck_ticket": "تذكرة الطيران", "ck_ticket_hint": "محفوظة في SafarCare", "ck_visaCheck": "متطلبات التأشيرة", "ck_visaCheck_hint": "تحقّق من السفارة أو سلطة الهجرة الخاصة بـ {place}", "ck_transitDocuments": "وثائق العبور", "ck_transitDocuments_hint": "اسأل شركة الطيران عمّا تحتاجه لتغيير الطائرة في {stops}", "ck_hotel": "حجز الفندق أو العنوان", "ck_hotel_hint": "إن كان لديك حجز فاحتفظ بنسخة منه", "ck_returnTicket": "تذكرة العودة أو المتابعة", "ck_returnTicket_hint": "تحقّق إن كانت ستُطلب منك", "ck_insurance": "تأمين السفر", "ck_insurance_hint": "تحقّق إن كان مطلوبًا لرحلتك", "ck_baggage": "جهّز حقائبك", "ck_baggage_hint_unknown": "أكّد الأمتعة المسموح بها مع شركة الطيران أولًا", "ck_arrivalTime": "خطّط لموعد الوصول إلى المطار", "ck_arrivalTime_hint": "اسأل شركة الطيران متى يُغلق تسجيل الوصول", "rqDisclaimer": "لا يقرّر SafarCare إن كنت تحتاج إلى تأشيرة. تحقّق من كل بند لدى السفارة أو سلطة الهجرة أو شركة الطيران.", "rq_passport_title": "صلاحية جواز السفر", "rq_passport_noDate": "أضف تاريخ انتهاء جواز سفرك لترى كم يبقى صالحًا بعد رحلتك. اسأل السفارة عن المدة المطلوبة.", "rq_passport_expires": "ينتهي جواز سفرك في {date}. اسأل السفارة عن مدة الصلاحية المطلوبة.", "rq_passport_months": "ينتهي جواز سفرك في {date} — بعد نحو {n} شهر/أشهر من نهاية رحلتك. اسأل السفارة عن مدة الصلاحية المطلوبة.", "rq_passport_beforeEnd": "ينتهي جواز سفرك في {date}، قبل نهاية هذه الرحلة. تواصل مع مكتب الجوازات.", "rq_passport_general": "تحقّق من تاريخ انتهاء جواز سفرك. تطلب دول كثيرة أن يبقى صالحًا لمدة بعد الوصول — والسفارة تخبرك بالمدة.", "rq_visa_title": "متطلبات التأشيرة", "rq_visa_body": "تحقّق من سفارة {place} أو سلطة الهجرة فيها إن كنت تحتاج إلى تأشيرة لهذه الرحلة وكيف تتقدّم بطلبها.", "rq_visa_general": "تحقّق من سفارة البلد الذي تسافر إليه أو سلطة الهجرة فيه. تعتمد القواعد على جواز سفرك وسبب رحلتك.", "rq_transit_title": "وثائق العبور", "rq_transit_body": "ستغيّر الطائرة في {place}. اسأل شركة الطيران أو السفارة إن كنت تحتاج إلى وثائق لهذا العبور.", "rq_transit_general": "إن كنت ستغيّر الطائرة في الطريق، فاسأل شركة الطيران إن كنت تحتاج إلى وثائق للعبور.", "rq_other_title": "التأمين ووثائق أخرى", "rq_other_body": "تحقّق إن كان سيُطلب منك تأمين سفر أو حجز فندق أو تذكرة عودة أو خطاب دعوة أو بطاقة تطعيم.", "rqAddExpiry": "أضف تاريخ الانتهاء", "rqChangeExpiry": "غيّر تاريخ الانتهاء", "rqNote": "ملاحظتك", "rqAddNote": "أضف ملاحظة", "rqEditNote": "عدّل الملاحظة", "rqMarkChecked": "وضع علامة تم التحقق: {item}", "rqMarkUnchecked": "إزالة علامة التحقق: {item}", "rqMyItems": "عناصري الخاصة", "rqMyItemsHint": "تظهر عناصرك الخاصة أيضًا في قائمة السفر لهذه الرحلة.", "rqScanForTrip": "امسح تذكرة للحصول على تذكيرات الرحلة", "guideIntro": "أول رحلة دولية لك؟ إليك ما يحدث في المطار خطوة بخطوة.", "guideDeparting": "المغادرة", "guideConnecting": "تغيير الطائرة", "guideArriving": "الوصول", "guideNext": "التالي: {step}", "g_checkin_title": "تسجيل الوصول وتسليم الحقائب", "g_checkin_intro": "عند تسجيل الوصول تؤكّد شركة الطيران مقعدك وتستلم حقائبك الكبيرة.", "g_checkin_s1": "ابحث عن اسم شركة الطيران على الشاشات في صالة المغادرة. ستعرف منها الكاونتر المطلوب.", "g_checkin_s2": "قدّم جواز سفرك وتذكرتك (ورقية أو على الهاتف) لموظف شركة الطيران.", "g_checkin_s3": "ضع حقائبك المسجّلة على الميزان. احتفظ بالمال والأدوية والوثائق والأشياء الثمينة في حقيبة اليد.", "g_checkin_s4": "ستحصل على بطاقة صعود وإيصال للحقائب. احتفظ بهما حتى تستلم حقائبك.", "g_security_title": "التفتيش الأمني", "g_security_intro": "يتأكد التفتيش الأمني من عدم إدخال أي شيء خطير إلى الطائرة.", "g_security_s1": "جهّز بطاقة الصعود. ضع حقيبتك وسترتك وحزامك وهاتفك والأشياء المعدنية في الصينية.", "g_security_s2": "يجب عادةً أن تكون السوائل في حقيبة اليد في عبوات صغيرة داخل كيس شفاف. تُصادر العبوات الكبيرة.", "g_security_s3": "امشِ عبر جهاز الفحص عندما يطلب الموظف. إن أصدر صوتًا فقد يفتشك الموظف يدويًا.", "g_security_s4": "استلم كل أغراضك من الصواني قبل أن تتابع.", "g_exitImmigration_title": "الجوازات (المغادرة)", "g_exitImmigration_intro": "يتحقّق موظف من جواز سفرك قبل مغادرة البلد.", "g_exitImmigration_s1": "قف في الطابور وانتظر خلف الخط حتى يُنادى عليك.", "g_exitImmigration_s2": "قدّم جواز سفرك وبطاقة الصعود. أجب عن الأسئلة بهدوء وببساطة.", "g_exitImmigration_s3": "قد يختم الموظف جوازك. تأكد أنك استعدته.", "g_exitImmigration_s4": "أنت الآن في منطقة المغادرة. لا تخرج منها.", "g_gates_title": "العثور على البوابة", "g_gates_intro": "البوابة هي المكان الذي تصعد منه إلى الطائرة. رقمها على بطاقة الصعود وعلى الشاشات.", "g_gates_s1": "ابحث عن رقم رحلتك على شاشات المغادرة. تُظهر البوابة ووقت الصعود.", "g_gates_s2": "قد تتغير البوابة. راجع الشاشات مرة أخرى واستمع إلى الإعلانات.", "g_gates_s3": "اذهب إلى بوابتك مبكرًا. بعض البوابات بعيدة.", "g_gates_s4": "إن ضللت الطريق، أرِ بطاقة الصعود لأي موظف في المطار واسأله.", "g_boarding_title": "الصعود إلى الطائرة", "g_boarding_intro": "الصعود هو دخول الركاب إلى الطائرة، وغالبًا على دفعات.", "g_boarding_s1": "يبدأ الصعود غالبًا قبل 30–60 دقيقة من الإقلاع. كن عند البوابة في الوقت المكتوب على بطاقة الصعود.", "g_boarding_s2": "انتظر حتى يُنادى على مجموعتك أو صف مقعدك.", "g_boarding_s3": "أظهر بطاقة الصعود وجواز السفر. سيمسح الموظفون بطاقة الصعود.", "g_boarding_s4": "ابحث عن رقم مقعدك على بطاقة الصعود. سيساعدك طاقم الطائرة.", "g_transit_title": "تغيير الطائرة (العبور)", "g_transit_intro": "إن كانت لديك رحلة متابعة، فاتبع لافتات العبور — عادةً لا تخرج من المطار.", "g_transit_s1": "عند نزولك من الطائرة، ابحث عن لافتات \"Transfer\" أو \"Transit\" أو \"Connecting flights\".", "g_transit_s2": "راجع الشاشات لمعرفة بوابة رحلتك التالية. قد تمرّ بالتفتيش الأمني مرة أخرى.", "g_transit_s3": "اسأل شركة الطيران قبل السفر إن كانت حقائبك ستُنقل مباشرة إلى وجهتك النهائية أو عليك استلامها.", "g_transit_s4": "إن كنت قلقًا بشأن الوقت، أرِ بطاقة الصعود لموظفي العبور واطلب المساعدة.", "g_arrivalImmigration_title": "الجوازات (الوصول)", "g_arrivalImmigration_intro": "عند وصولك، يقرّر موظف الجوازات إن كان يمكنك دخول البلد.", "g_arrivalImmigration_s1": "اتبع لافتات \"Arrivals\" أو \"Immigration\". في بعض الدول طوابير منفصلة للمواطنين والزوار.", "g_arrivalImmigration_s2": "جهّز جواز سفرك والتأشيرة (إن كنت تحتاج إليها) وأي وثائق مثل حجز الفندق أو خطاب الدعوة.", "g_arrivalImmigration_s3": "أجب بصدق عن الأسئلة: سبب زيارتك، ومدة إقامتك، وأين ستقيم.", "g_arrivalImmigration_s4": "قد تحتاج إلى ملء بطاقة وصول. اطلبها من طاقم الطائرة.", "g_baggageClaim_title": "استلام الحقائب", "g_baggageClaim_intro": "تخرج حقائبك المسجّلة على سير متحرك في صالة الأمتعة.", "g_baggageClaim_s1": "ابحث عن رقم رحلتك على الشاشات. تُظهر السير الذي ستصل عليه حقائبك.", "g_baggageClaim_s2": "تأكد أن الملصق على حقيبتك يطابق إيصال الأمتعة. حقائب كثيرة متشابهة.", "g_baggageClaim_s3": "إن لم تصل حقيبتك، اذهب إلى مكتب خدمة الأمتعة قبل مغادرة الصالة وأظهر الإيصال.", "g_baggageClaim_s4": "قد تمرّ بالجمارك. اتبع المسار الأخضر إن لم يكن لديك ما تصرّح به، أو الأحمر إن كان لديك.", "tip1_title": "احتفظ بنسخ من وثائقك", "tip1_body": "احفظ صورًا لجواز سفرك وتأشيرتك وتذكرتك، واحمل نسخة ورقية بعيدًا عن الأصول.", "tip2_title": "اذهب إلى المطار مبكرًا", "tip2_body": "قد يُغلق تسجيل الوصول للرحلات الدولية قبل ساعة أو أكثر من الإقلاع. اسأل شركة الطيران عن الوقت الدقيق.", "tip3_title": "زِن حقائبك في البيت", "tip3_body": "الوزن الزائد في المطار قد يكون مكلفًا. راجع الأمتعة المسموح بها في SafarCare وزِن حقائبك قبل الخروج.", "tip4_title": "اعرف ما لا يجوز وضعه في الحقيبة", "tip4_body": "لا يُسمح بالأدوات الحادة والسوائل الكبيرة في حقيبة اليد. البطاريات وشواحن الطاقة المحمولة يجب أن تكون في حقيبة اليد لا في الحقائب المسجّلة.", "tip5_title": "اشحن هاتفك", "tip5_body": "قد تكون بطاقة الصعود على هاتفك. اشحنه بالكامل واحمل الشاحن.", "tip6_title": "احمل بعض المال", "tip6_body": "احتفظ بمبلغ صغير لمطارات العبور. ليست كل الأماكن تقبل البطاقات نفسها.", "tip7_title": "الأدوية في حقيبة اليد", "tip7_body": "احتفظ بالأدوية التي تحتاجها في حقيبة اليد مع الوصفة أو رسالة من الطبيب.", "tip8_title": "اطلب المساعدة", "tip8_body": "يساعد موظفو الطيران والمطار المسافرين كل يوم. أظهر بطاقة الصعود واسأل — هذا أمر طبيعي.", "settings": "الإعدادات", "sectionPreferences": "التفضيلات", "sectionAccount": "الحساب", "sectionAbout": "حول", "language": "اللغة", "appearance": "المظهر", "themeSystem": "مثل الهاتف", "themeLight": "فاتح", "themeDark": "داكن", "english": "English", "somali": "Soomaali", "arabic": "العربية", "notifications": "تذكيرات الرحلة", "notifSettingHint": "تذكير قبل رحلتك بأسبوع وبيوم", "notifDenied": "الإشعارات متوقفة لتطبيق SafarCare. يمكنك السماح بها من إعدادات الهاتف.", "notifChannel": "تذكيرات الرحلة", "notifChannelDesc": "تذكيرات قبل رحلاتك", "notifWeekTitle": "أسبوع واحد حتى {route}", "notifWeekBody": "تحقّق من متطلبات سفرك: جواز السفر والتأشيرة ووثائق العبور.", "notifDayTitle": "غدًا: {route}", "notifDayBody": "جهّز وثائقك وتحقّق متى يُغلق تسجيل الوصول.", "privacy": "الخصوصية", "signIn": "تسجيل الدخول أو إنشاء حساب", "signInOptional": "اختياري — نسخة احتياطية لرحلاتك", "deleteAccount": "حذف الحساب", "aboutSafarCare": "حول SafarCare", "aboutBody": "يساعد SafarCare المسافرين على فهم رحلاتهم وأمتعتهم ووثائقهم وإجراءات المطار. يقدّم إرشادات فقط — تحقّق دائمًا من التفاصيل المهمة مع شركة الطيران أو السفارة المعنية.", "helpSupport": "المساعدة والدعم", "terms": "الشروط والأحكام", "version": "الإصدار", "account": "الحساب", "accountsOffTitle": "الحسابات غير متاحة بعد", "accountsOffBody": "هذا الإصدار من SafarCare غير متصل بخدمة الحسابات. كل أدوات السفر تعمل، ورحلاتك محفوظة على هذا الهاتف.", "authSignInTitle": "تسجيل الدخول", "authCreateTitle": "أنشئ حسابك", "authWhy": "الحساب اختياري. يحفظ نسخة من رحلاتك لتستعيدها على هاتف جديد.", "authName": "اسمك", "authNameRequired": "يُرجى إدخال اسمك", "authEmail": "البريد الإلكتروني", "authPassword": "كلمة المرور", "authPasswordHelp": "8 أحرف على الأقل", "authPasswordAgain": "أدخل كلمة المرور مرة أخرى", "authShowPassword": "إظهار كلمة المرور", "authHidePassword": "إخفاء كلمة المرور", "authSignInButton": "تسجيل الدخول", "authCreateButton": "إنشاء حساب", "authForgot": "نسيت كلمة المرور؟", "authNoAccount": "جديد هنا؟ أنشئ حسابًا", "authHaveAccount": "لديك حساب؟ سجّل الدخول", "authResetSent": "أرسلنا رابطًا لإعادة تعيين كلمة المرور. تحقّق من بريدك.", "authResetNeedsEmail": "اكتب بريدك الإلكتروني أولًا، ثم اضغط «نسيت كلمة المرور؟».", "authPrivacyNote": "تذهب كلمة المرور مباشرة إلى خدمة تسجيل الدخول الآمنة. لا يراها SafarCare ولا يحفظها أبدًا.", "authEditName": "تغيير الاسم", "authErrEmail": "يُرجى إدخال بريد إلكتروني صحيح", "authErrWeak": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل", "authErrCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة", "authErrInUse": "يوجد حساب بهذا البريد بالفعل. جرّب تسجيل الدخول.", "authErrDisabled": "تم إيقاف هذا الحساب. تواصل مع الدعم.", "authErrTooMany": "محاولات كثيرة. انتظر بضع دقائق وحاول مرة أخرى.", "authErrRecentLogin": "حفاظًا على أمانك، سجّل الدخول مرة أخرى أولًا.", "authErrGeneric": "حدث خطأ ما. حاول مرة أخرى.", "verifyTitle": "تحقّق من بريدك", "verifyBody": "أرسلنا رابطًا إلى {email}. اضغط عليه لتأكيد بريدك ثم عد إلى هنا.", "verifyDone": "أكّدت بريدي الإلكتروني", "verifyNotYet": "لم يتم التأكيد بعد. اضغط الرابط في الرسالة ثم حاول مرة أخرى.", "verifyResend": "أرسل الرسالة مرة أخرى", "verifyResent": "أُرسلت الرسالة مرة أخرى", "signOut": "تسجيل الخروج", "backupOn": "تفاصيل رحلاتك محفوظة احتياطيًا. ملفات التذاكر وتاريخ جواز سفرك تبقى على هذا الهاتف فقط.", "deleteAccountTitle": "حذف حسابك؟", "deleteAccountBody": "سيُحذف حسابك ورحلاتك المحفوظة احتياطيًا والرحلات والتذاكر المحفوظة على هذا الهاتف. لا يمكن التراجع عن ذلك.", "deleteForever": "حذف نهائي", "accountDeleted": "تم حذف حسابك", "pv_read_title": "تُقرأ تذكرتك على هاتفك", "pv_read_body": "تُقرأ الصور وملفات PDF على هذا الهاتف، ولا تُرفع إلى أي مكان لقراءتها.", "pv_store_title": "الرحلات المحفوظة مشفّرة", "pv_store_body": "الرحلات وملفات التذاكر التي تحفظها مشفّرة على هذا الهاتف، ومفتاح التشفير محفوظ في التخزين الآمن للهاتف.", "pv_cloud_title": "النسخ الاحتياطي اختياري", "pv_cloud_body": "إن أنشأت حسابًا، تُحفظ تفاصيل رحلاتك احتياطيًا بحيث لا يراها غيرك. ملفات التذاكر وتاريخ جوازك لا تُرفع أبدًا.", "pv_smart_title": "القراءة الذكية عند طلبك فقط", "pv_smart_body": "إن ضغطت «القراءة الذكية»، يُرسل نص التذكرة فقط إلى خدمتنا الآمنة لإيجاد التفاصيل الناقصة، ولا يُحفظ هناك.", "pv_share_title": "لا مشاركة أبدًا", "pv_share_body": "لا تُعرض وثائقك على مستخدمين آخرين ولا تُباع ولا تُستخدم للإعلانات. لا يحتوي SafarCare على إعلانات.", "pv_delete_title": "احذف في أي وقت", "pv_delete_body": "احذف رحلة واحدة من صفحتها، أو كل شيء على هذا الهاتف من الأسفل، أو حسابك من إعدادات الحساب.", "pvDeleteAll": "حذف كل البيانات على هذا الهاتف", "pvDeleteAllTitle": "حذف كل شيء على هذا الهاتف؟", "pvDeleteAllBody": "ستُحذف كل الرحلات والقوائم وملفات التذاكر المحفوظة على هذا الهاتف. لا يتأثر النسخ الاحتياطي لحسابك (إن وُجد).", "pvDeleted": "تم حذف كل البيانات على هذا الهاتف", "faq1_q": "هل SafarCare مجاني؟", "faq1_a": "نعم. SafarCare مجاني ولا يحتوي على إعلانات.", "faq2_q": "لماذا يظهر «غير موجود»؟", "faq2_a": "بعض التذاكر لا تُظهر كل التفاصيل، أو الصورة غير واضحة. لا يخمّن SafarCare أبدًا. اضغط الحقل لإدخاله بنفسك أو اسأل شركة الطيران.", "faq3_q": "هل يخبرني SafarCare إن كنت أحتاج إلى تأشيرة؟", "faq3_a": "لا. تعتمد قواعد التأشيرة على جواز سفرك وتتغير كثيرًا، لذلك يذكّرك SafarCare بالتحقق من السفارة أو سلطة الهجرة.", "faq4_q": "هل أحتاج إلى حساب؟", "faq4_a": "لا. كل الأدوات تعمل بدونه. الحساب يحفظ نسخة احتياطية من رحلاتك فقط.", "faq5_q": "الأمتعة المسموح بها تبدو خاطئة", "faq5_a": "اضغط عليها في صفحة رحلتك لتصحيحها. القرار النهائي بشأن الأمتعة لشركة الطيران.", "helpContact": "تحتاج إلى مساعدة أكثر؟ راسلنا على {email}", "tm1_title": "إرشاد فقط", "tm1_body": "يساعدك SafarCare على فهم رحلتك. وهو ليس شركة طيران ولا وكيل سفر ولا جهة حكومية.", "tm2_title": "تحقّق من التفاصيل المهمة", "tm2_body": "أكّد دائمًا الرحلات والأمتعة والتأشيرات والوثائق مع شركة الطيران والجهات المعنية. دخول أي بلد يقرّره مسؤولوه.", "tm3_title": "مسؤولياتك", "tm3_body": "لا تمسح إلا التذاكر الخاصة بك أو التي لديك إذن باستخدامها. حافظ على بيانات حسابك آمنة.", "tm4_title": "بياناتك", "tm4_body": "شرحنا في صفحة الخصوصية كيف تُعالج وثائقك وتُحفظ. يمكنك حذف بياناتك في أي وقت.", "tm5_title": "التغييرات", "tm5_body": "قد نحدّث التطبيق وهذه الشروط. إن تغيّر أمر مهم فسنخبرك داخل التطبيق."}};
+// Prototype of the SafarCare ticket parser, used only to test the regexes
+// and the assembly logic here. The app's real parser is the Dart port.
+const AIRPORTS = {
+  HGA:'Hargeisa',BBO:'Berbera',BSA:'Bosaso',MGQ:'Mogadishu',GLK:'Galkayo',KMU:'Kismayo',BUO:'Burao',GGR:'Garowe',
+  JIB:'Djibouti',ADD:'Addis Ababa',DIR:'Dire Dawa',JIJ:'Jijiga',NBO:'Nairobi',MBA:'Mombasa',EBB:'Entebbe',
+  DAR:'Dar es Salaam',JRO:'Kilimanjaro',ZNZ:'Zanzibar',KGL:'Kigali',KRT:'Khartoum',PZU:'Port Sudan',ASM:'Asmara',
+  CAI:'Cairo',HBE:'Alexandria',JNB:'Johannesburg',CPT:'Cape Town',LOS:'Lagos',ACC:'Accra',
+  DXB:'Dubai',DWC:'Dubai World Central',SHJ:'Sharjah',AUH:'Abu Dhabi',DOH:'Doha',BAH:'Bahrain',KWI:'Kuwait',
+  MCT:'Muscat',SLL:'Salalah',RUH:'Riyadh',JED:'Jeddah',MED:'Madinah',DMM:'Dammam',AMM:'Amman',BEY:'Beirut',
+  IST:'Istanbul',SAW:'Istanbul Sabiha Gokcen',ESB:'Ankara',ADE:'Aden',SAH:'Sanaa',
+  BOM:'Mumbai',DEL:'Delhi',BLR:'Bengaluru',KHI:'Karachi',ISB:'Islamabad',LHE:'Lahore',CMB:'Colombo',MLE:'Male',
+  KUL:'Kuala Lumpur',SIN:'Singapore',BKK:'Bangkok',CGK:'Jakarta',CAN:'Guangzhou',PEK:'Beijing',PKX:'Beijing Daxing',HKG:'Hong Kong',
+  LHR:'London Heathrow',LGW:'London Gatwick',STN:'London Stansted',MAN:'Manchester',BHX:'Birmingham',
+  CDG:'Paris',AMS:'Amsterdam',FRA:'Frankfurt',MUC:'Munich',BRU:'Brussels',ZRH:'Zurich',GVA:'Geneva',VIE:'Vienna',
+  CPH:'Copenhagen',ARN:'Stockholm',GOT:'Gothenburg',OSL:'Oslo',HEL:'Helsinki',FCO:'Rome',MXP:'Milan',MAD:'Madrid',
+  BCN:'Barcelona',LIS:'Lisbon',ATH:'Athens',DUB:'Dublin',
+  JFK:'New York JFK',EWR:'Newark',IAD:'Washington Dulles',ORD:'Chicago',MSP:'Minneapolis',ATL:'Atlanta',IAH:'Houston',
+  DFW:'Dallas',LAX:'Los Angeles',SEA:'Seattle',SFO:'San Francisco',BOS:'Boston',CMH:'Columbus',
+  YYZ:'Toronto',YUL:'Montreal',YOW:'Ottawa',YVR:'Vancouver',YEG:'Edmonton',YYC:'Calgary',
+  TUN:'Tunis',ALG:'Algiers',CMN:'Casablanca',
+};
+// Codes that are also common words/abbreviations: need extra context.
+const AMBIGUOUS = new Set(['ADD','CAN','MAN','LOS','SIN','MAD','DEL','MED','ACC','EBB','SEA','LAX','ORD','ATH','BOM','DIR','MBA','TUN','DUB','BOS','CAI','AMS','FRA','SAW','GOT','DAR','BAH','ARN','HEL']);
+const AIRLINES = {
+  ET:'Ethiopian Airlines',FZ:'flydubai',EK:'Emirates',QR:'Qatar Airways',TK:'Turkish Airlines',KQ:'Kenya Airways',
+  WY:'Oman Air',J9:'Jazeera Airways',SV:'Saudia',MS:'EgyptAir',XY:'flynas',G9:'Air Arabia',D3:'Daallo Airlines',
+  '3J':'Jubba Airways',XU:'African Express Airways',EY:'Etihad Airways',GF:'Gulf Air',KU:'Kuwait Airways',
+  RJ:'Royal Jordanian',ME:'Middle East Airlines',PC:'Pegasus Airlines',WB:'RwandAir',TC:'Air Tanzania',
+  UR:'Uganda Airlines',KP:'ASKY Airlines',AT:'Royal Air Maroc',
+  BA:'British Airways',LH:'Lufthansa',AF:'Air France',KL:'KLM',SN:'Brussels Airlines',LX:'SWISS',OS:'Austrian Airlines',
+  SK:'SAS',AY:'Finnair',AZ:'ITA Airways',IB:'Iberia',TP:'TAP Air Portugal',A3:'Aegean Airlines',EI:'Aer Lingus',
+  AA:'American Airlines',UA:'United Airlines',DL:'Delta Air Lines',AC:'Air Canada',
+  AI:'Air India','6E':'IndiGo',PK:'Pakistan International Airlines',UL:'SriLankan Airlines',MH:'Malaysia Airlines',
+  SQ:'Singapore Airlines',TG:'Thai Airways',GA:'Garuda Indonesia',CZ:'China Southern',CA:'Air China',CX:'Cathay Pacific',
+  IY:'Yemenia',SM:'Air Cairo',NE:'Nesma Airlines',F3:'flyadeal',OV:'SalamAir',
+};
+const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+
+function norm(text){
+  return text.toUpperCase().replace(/[–—]/g,'-').replace(/→/g,' - ').replace(/[ \t]+/g,' ');
+}
+
+const TIME_RE = /(?<![\d./])\b([01]?\d|2[0-3])[:.H]([0-5]\d)(?![./]\d)\s?(AM|PM)?\b/g;
+
+function findAirports(text){
+  const out=[];
+  const lines=text.split('\n'); let offset=0;
+  for(const line of lines){
+    const hasTime=/\b([01]?\d|2[0-3]):[0-5]\d\b/.test(line);
+    const strong=[]; // unambiguous codes or bracketed codes in this line
+    const cands=[];
+    // City pairs like HGAADD
+    for(const m of line.matchAll(/\b([A-Z]{3})([A-Z]{3})\b/g)){
+      if(AIRPORTS[m[1]]&&AIRPORTS[m[2]]&&m[1]!==m[2]){cands.push({code:m[1],pos:offset+m.index,ok:true});cands.push({code:m[2],pos:offset+m.index+3,ok:true});}
+    }
+    for(const m of line.matchAll(/\b([A-Z]{3})\b/g)){
+      const code=m[1]; if(!AIRPORTS[code]) continue;
+      const before=line[m.index-1], after=line[m.index+3];
+      const bracketed=before==='('&&after===')';
+      const city=AIRPORTS[code].toUpperCase();
+      const cityNear=line.includes(city.split(' ')[0]);
+      cands.push({code,pos:offset+m.index,bracketed,cityNear,ok:!AMBIGUOUS.has(code)||bracketed||cityNear});
+    }
+    const okCount=cands.filter(c=>c.ok).length;
+    for(const c of cands){
+      // An ambiguous code is accepted if the same line also has another
+      // accepted airport, or a clock time (itinerary line).
+      if(c.ok || okCount>=1&&cands.length>=2 || hasTime&&cands.length>=2) out.push({code:c.code,pos:c.pos});
+    }
+    offset+=line.length+1;
+  }
+  out.sort((a,b)=>a.pos-b.pos);
+  return out;
+}
+
+function findFlights(text){
+  const out=[];
+  const re=/\b([A-Z]{2}|[A-Z]\d|\d[A-Z])\s?-?\s?(\d{1,4})(?![\d:.]|\s?KG|\s?PC)\b/g;
+  for(const m of text.matchAll(re)){
+    const code=m[1];
+    const known=!!AIRLINES[code];
+    const ctx=text.slice(Math.max(0,m.index-25),m.index);
+    const flightWord=/FLIGHT|FLT|VOL|RIHLA/.test(ctx);
+    if(!known&&!flightWord) continue;
+    if(/^\d+$/.test(code)) continue;
+    out.push({code,number:m[2],pos:m.index,flight:code+' '+String(parseInt(m[2],10))});
+  }
+  return out;
+}
+
+function inferYear(day,month,now){
+  let y=now.getFullYear();
+  const d=new Date(y,month,day);
+  if(d < new Date(now.getFullYear(),now.getMonth(),now.getDate()-60)) y+=1;
+  return y;
+}
+
+function findDates(text,now){
+  const out=[];
+  const mon='(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)[A-Z]*\\.?';
+  const add=(pos,len,y,mo,d)=>{ if(mo<0||mo>11||d<1||d>31) return; if(y<2000||y>2100) return; out.push({pos,len,y,mo,d}); };
+  // 19NOV26, 19 NOV 2026, 19 November 2026, THU 19NOV
+  for(const m of text.matchAll(new RegExp('\\b(\\d{1,2})\\s?-?'+mon+'\\s?-?,?\\s?(\\d{4}|\\d{2}(?![:\\d]))?','g'))){
+    const d=+m[1], mo=MONTHS.indexOf(m[2]);
+    let y=m[3]?+m[3]:null; if(y!==null&&y<100) y+=2000; if(y===null) y=inferYear(d,mo,now);
+    add(m.index,m[0].length,y,mo,d);
+  }
+  // Nov 19, 2026
+  for(const m of text.matchAll(new RegExp('\\b'+mon+'\\s(\\d{1,2}),?\\s(\\d{4})\\b','g'))){
+    add(m.index,m[0].length,+m[3],MONTHS.indexOf(m[1]),+m[2]);
+  }
+  // 2026-11-19
+  for(const m of text.matchAll(/\b(20\d{2})-(\d{2})-(\d{2})\b/g)) add(m.index,m[0].length,+m[1],+m[2]-1,+m[3]);
+  // 19/11/2026 (day first)
+  for(const m of text.matchAll(/\b(\d{1,2})[\/.](\d{1,2})[\/.](20\d{2}|\d{2})\b/g)){
+    let y=+m[3]; if(y<100) y+=2000; add(m.index,m[0].length,y,+m[2]-1,+m[1]);
+  }
+  // drop overlaps (keep longest earliest)
+  out.sort((a,b)=>a.pos-b.pos||b.len-a.len);
+  const res=[]; let end=-1;
+  for(const d of out){ if(d.pos>=end){res.push(d); end=d.pos+d.len;} }
+  return res;
+}
+
+function findTimes(text){
+  const out=[];
+  for(const m of text.matchAll(TIME_RE)){
+    let h=+m[1]; const mi=+m[2];
+    if(m[3]==='PM'&&h<12) h+=12; if(m[3]==='AM'&&h===12) h=0;
+    out.push({pos:m.index,h,mi});
+  }
+  // GDS style 4-digit times on lines with a city pair: "HGAADD HK1 1430 1630"
+  const lines=text.split('\n'); let off=0;
+  for(const line of lines){
+    if(/\b[A-Z]{6}\b/.test(line) && [...line.matchAll(/\b([A-Z]{3})([A-Z]{3})\b/g)].some(m=>AIRPORTS[m[1]]&&AIRPORTS[m[2]])){
+      for(const m of line.matchAll(/\b([01]\d|2[0-3])([0-5]\d)(?:\+1)?\b/g)) out.push({pos:off+m.index,h:+m[1],mi:+m[2]});
+    }
+    off+=line.length+1;
+  }
+  return out.sort((a,b)=>a.pos-b.pos);
+}
+
+function between(list,start,end){return list.filter(x=>x.pos>=start&&x.pos<end);}
+
+function buildSegments(text,now){
+  const airports=findAirports(text), flights=findFlights(text), dates=findDates(text,now), times=findTimes(text);
+  const segs=[];
+  const mkDT=(regionDates,regionTimes,lastDate)=>{
+    const res=[];
+    let curDate=lastDate;
+    const events=[...regionDates.map(d=>({...d,t:'d'})),...regionTimes.map(t=>({...t,t:'t'}))].sort((a,b)=>a.pos-b.pos);
+    for(const e of events){
+      if(e.t==='d'){curDate=e;}
+      else if(curDate){
+        let dt=new Date(curDate.y,curDate.mo,curDate.d,e.h,e.mi);
+        // A time-only arrival earlier than the departure on the same date is the next day.
+        const prev=res[res.length-1];
+        if(prev&&prev.dateRef===curDate&&dt<=prev) dt=new Date(dt.getTime()+86400000);
+        dt.dateRef=curDate; res.push(dt);
+      }
+    }
+    // a date with no time is still useful (date only)
+    if(res.length===0&&regionDates.length) res.push(new Date(regionDates[0].y,regionDates[0].mo,regionDates[0].d));
+    return {dts:res,lastDate:curDate};
+  };
+  const uniqFlights=[];
+  for(const f of flights){ if(!uniqFlights.some(u=>u.flight===f.flight)) uniqFlights.push(f); }
+  if(uniqFlights.length){
+    let lastDate=null;
+    const used=new Set();
+    const lineStart=(pos)=>{ const a=text.lastIndexOf('\n',pos-1); const b=a<0?0:text.lastIndexOf('\n',a-1); return i=>i; };
+    for(let i=0;i<uniqFlights.length;i++){
+      const f=uniqFlights[i];
+      // Region: from the start of the line before the flight number
+      // (route lines often sit just above), to the next different flight.
+      const prevNl=text.lastIndexOf('\n',f.pos-1);
+      const prevLineStart=prevNl<0?0:text.lastIndexOf('\n',prevNl-1)+1;
+      const nextPos = flights.find(x=>x.pos>f.pos&&x.flight!==f.flight)?.pos ?? text.length;
+      const end=nextPos;
+      const linesBack=(n)=>{ let p=f.pos; for(let k=0;k<=n;k++){ const nl=text.lastIndexOf('\n',p-1); if(nl<0) return 0; p=nl; } return p+1; };
+      const pick=(start)=>{ const res=[]; for(const a of between(airports,start,end).filter(x=>!used.has(x.pos))){ if(!res.length||res[res.length-1].code!==a.code) res.push(a); if(res.length===2) break; } return res; };
+      let start=linesBack(1);
+      let picked=pick(start);
+      if(picked.length<2){ start=linesBack(3); picked=pick(start); }
+      const free=(list)=>between(list,start,end).filter(x=>!used.has(x.pos));
+      const rd=free(dates), rt=free(times);
+      const {dts,lastDate:ld}=mkDT(rd,rt,lastDate); lastDate=ld;
+      if(picked.length===2){
+        picked.forEach(a=>used.add(a.pos));
+        [...rd,...rt].filter(x=>x.pos>=Math.min(f.pos,picked[0].pos)).forEach(x=>used.add(x.pos));
+        segs.push({from:picked[0].code,to:picked[1].code,flight:f.flight,dep:dts[0]||null,arr:(dts[1]&&dts[0]&&dts[1]>dts[0])?dts[1]:null});
+      }
+    }
+  }
+  if(!segs.length){
+    const seq=[];
+    for(const a of airports){ if(seq[seq.length-1]!==a.code) seq.push(a.code); }
+    const {dts}=mkDT(dates,times,null);
+    for(let i=0;i+1<seq.length;i++) segs.push({from:seq[i],to:seq[i+1],flight:null,dep:dts[i]||null,arr:null});
+  }
+  // chain sanity: drop a segment that duplicates another
+  return segs.filter((s,i)=>!segs.slice(0,i).some(p=>p.from===s.from&&p.to===s.to&&p.flight===s.flight));
+}
+
+function findPassenger(text){
+  let m=text.match(/\b([A-Z][A-Z'-]{1,})\/([A-Z][A-Z'-]+(?: (?!(?:MR|MRS|MS|MISS|MSTR|DR|CHD|INF)\b)[A-Z][A-Z'-]+)*)(?:\s?(MR|MRS|MS|MISS|MSTR|DR|CHD|INF))?\b/);
+  if(m) return (m[2]+' '+m[1]).replace(/\s+/g,' ').trim();
+  m=text.match(/\b(?:PASSENGER(?:\s?NAME)?|TRAVELL?ER(?:\s?NAME)?|NAME OF PASSENGER)\s*[:\-]?\s*(?:\n\s*)?(?:(?:MR|MRS|MS|MISS|DR)\.?\s)?([A-Z][A-Z'-]+(?: [A-Z][A-Z'-]+){1,3})\b/);
+  if(m&&!/^(DETAILS|INFORMATION|TYPE|ADULT)/.test(m[1])) return m[1].replace(/\s(MR|MRS|MS|MISS)$/,'').trim();
+  m=text.match(/^\s*(?:MR|MRS|MS|MISS|MSTR|DR)\.?\s([A-Z][A-Z'-]+(?: [A-Z][A-Z'-]+){1,3})\s*$/m);
+  if(m) return m[1];
+  return null;
+}
+
+function findBookingRef(text){
+  const re=/\b(?:BOOKING\s?(?:REF(?:ERENCE)?|CODE|NUMBER|ID)|PNR|RECORD\s?LOCATOR|RESERVATION\s?(?:CODE|NUMBER|REF(?:ERENCE)?)|CONFIRMATION\s?(?:CODE|NUMBER)|AIRLINE\s?(?:REF(?:ERENCE)?|BOOKING\s?REF(?:ERENCE)?))\.?\s?(?:NO\.?|#)?\s?[:\-]?\s*(?:\n\s*)?([A-Z0-9]{5,8})\b/g;
+  for(const m of text.matchAll(re)){
+    const v=m[1];
+    if(/[A-Z]/.test(v)&&/^[A-Z0-9]+$/.test(v)&&!['NUMBER','CODE','STATUS','DETAILS','ISSUED'].includes(v)) return v;
+  }
+  return null;
+}
+
+function findClass(text){
+  const m=text.match(/\b(PREMIUM ECONOMY|ECONOMY|BUSINESS|FIRST)(?:\s?CLASS)?\b/);
+  return m?m[1].charAt(0)+m[1].slice(1).toLowerCase():null;
+}
+function findFare(text){
+  let m=text.match(/\bFARE\s?(?:TYPE|FAMILY|BRAND)\s*[:\-]?\s*([A-Z][A-Z ]{2,20}?)\s*(?:\n|$|  )/);
+  if(m) return m[1].trim();
+  m=text.match(/\bFARE\s?BASIS\s*[:\-]?\s*([A-Z0-9]{3,10})\b/);
+  return m?m[1]:null;
+}
+function findTerminal(text){const m=text.match(/\bTERMINAL\s*[:\-]?\s*([A-Z0-9]{1,3})\b/);return m?m[1]:null;}
+function findGate(text){const m=text.match(/\bGATE\s*[:\-]?\s*([A-Z]?\d{1,3}[A-Z]?)\b/);return m?m[1]:null;}
+
+// ---------- baggage ----------
+const CABIN_WORDS=/CABIN|HAND\s?(?:BAG|LUGGAGE|BAGGAGE)|CARRY[\s-]?ON|PERSONAL ITEM|HAND$/;
+const CHECKED_WORDS=/CHECKED|CHECK[\s-]?IN BAG|HOLD|FREE BAG|BAGGAGE|LUGGAGE|BAG ALLOWANCE|\bBAGS?\b/;
+const SALES_WORDS=/EXTRA|EXCESS|ADDITIONAL|PURCHASE|\bBUY\b|\bFEE|USD|\$|ETB|AED|EUR|PER KG|PRE-?PAID|UPGRADE/;
+
+function findBaggage(text){
+  const lines=text.split('\n');
+  const checked=[], cabin=[];
+  for(let li=0;li<lines.length;li++){
+    const line=lines[li];
+    if(SALES_WORDS.test(line)) continue;
+    const toks=[];
+    const taken=[];
+    const push=(m,a)=>{ taken.push([m.index,m.index+m[0].length]); toks.push({...a,raw:m[0].trim(),idx:m.index}); };
+    for(const m of line.matchAll(/\b(\d{1,2})\s?[X×*]\s?(\d{1,2})\s?KGS?\b/g)) push(m,{pieces:+m[1],kgPerPiece:+m[2]});
+    for(const m of line.matchAll(/\b(\d{1,2})\s?(?:PCS?|PIECES?)\b(?:\s?(?:OF|X|@|,|\/)?\s?(?:UP TO|MAX\.?|MAX)?\s?(\d{1,2})\s?KGS?\b)?/g)){
+      if(taken.some(([s,e])=>m.index>=s&&m.index<e)) continue;
+      push(m,{pieces:+m[1],kgPerPiece:m[2]?+m[2]:null});
+    }
+    for(const m of line.matchAll(/\b(\d{1,3})\s?KGS?\b/g)){
+      if(taken.some(([s,e])=>m.index>=s&&m.index<e)) continue;
+      push(m,{totalKg:+m[1]});
+    }
+    for(const m of line.matchAll(/\b(NIL|NO)\s(?:CHECKED\s)?BAG(?:GAGE)?S?\b/g)) push(m,{pieces:0});
+    for(const t of toks){
+      const ctx=(lines[li-1]&&!/\d/.test(lines[li-1])?lines[li-1]+' ':'')+line.slice(0,t.idx);
+      const after=line.slice(t.idx+t.raw.length);
+      let kind=null;
+      if(CABIN_WORDS.test(ctx)) kind='cabin';
+      else if(CHECKED_WORDS.test(ctx)) kind='checked';
+      else if(CABIN_WORDS.test(after)) kind='cabin';
+      else if(/^\s?(CHECKED|CHECK[\s-]?IN)/.test(after)) kind='checked';
+      // A cabin word earlier on the line followed by "checked" closer to the token
+      const li2=(re)=>{let r=-1;for(const m of ctx.matchAll(re)) r=m.index;return r;}; const lastCabin=li2(/CABIN|HAND|CARRY/g), lastChecked=li2(/CHECKED|CHECK[\s-]?IN|HOLD/g);
+      if(lastCabin>=0&&lastChecked>lastCabin) kind='checked';
+      if(lastChecked>=0&&lastCabin>lastChecked) kind='cabin';
+      if(kind==='cabin') cabin.push(t); else if(kind==='checked') checked.push(t);
+    }
+  }
+  return {checked:merge(checked),cabin:merge(cabin)};
+}
+function compatible(a,b){
+  const k=['pieces','kgPerPiece','totalKg'];
+  return k.every(x=>a[x]==null||b[x]==null||a[x]===b[x]);
+}
+function merge(list){
+  if(!list.length) return {status:'notFound'};
+  let acc={pieces:null,kgPerPiece:null,totalKg:null,raw:[]};
+  for(const t of list){
+    if(!compatible(acc,t)) return {status:'conflict',raw:list.map(x=>x.raw)};
+    for(const k of ['pieces','kgPerPiece','totalKg']) if(t[k]!=null) acc[k]=t[k];
+    if(!acc.raw.includes(t.raw)) acc.raw.push(t.raw);
+  }
+  // "2PC" + "23KG" seen separately: 23 is per piece, not total
+  if(acc.pieces!=null&&acc.totalKg!=null&&acc.kgPerPiece==null){acc.kgPerPiece=acc.totalKg;acc.totalKg=null;}
+  return {status:'found',...acc};
+}
+
+function parse(raw,now=new Date()){
+  const text=norm(raw);
+  const segs=buildSegments(text,now);
+  const firstFlight=findFlights(text)[0];
+  return {
+    terminalFirst:findTerminal(text),
+    passenger:findPassenger(text),
+    airline: firstFlight? AIRLINES[firstFlight.code]||null : null,
+    bookingRef:findBookingRef(text),
+    cls:findClass(text), fare:findFare(text),
+    terminal:findTerminal(text), gate:findGate(text),
+    segments:segs,
+    baggage:findBaggage(text),
+  };
+}
+
+
+// SafarCare web preview — mirrors the Flutter app's screens and logic.
+// Uses the same strings (STRINGS) and the same ticket parser (parse) as the app.
+const S = {
+  lang: 'en', theme: 'light', trips: [], stack: [{ r: 'home' }], tab: 'home',
+  draft: null, notif: false, toast: null,
+};
+try { const saved = JSON.parse(localStorage.getItem('safarcare-preview') || '{}'); Object.assign(S, saved, { stack: [{ r: 'home' }], tab: 'home', draft: null, toast: null }); S.trips = (S.trips || []).map(revive); } catch (e) {}
+function persist() { try { localStorage.setItem('safarcare-preview', JSON.stringify({ lang: S.lang, theme: S.theme, trips: S.trips, notif: S.notif })); } catch (e) {} }
+function revive(t) { t.segments = t.segments.map(s => ({ ...s, dep: s.dep ? new Date(s.dep) : null, arr: s.arr ? new Date(s.arr) : null })); if (t.passportExpiry) t.passportExpiry = new Date(t.passportExpiry); return t; }
+
+const t = (k, a = {}) => { let v = (STRINGS[S.lang] && STRINGS[S.lang][k]) || STRINGS.en[k] || k; for (const [x, y] of Object.entries(a)) v = v.split('{' + x + '}').join(y); return v; };
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const two = n => String(n).padStart(2, '0');
+const fDate = d => `${d.getDate()} ${t('month' + (d.getMonth() + 1))} ${d.getFullYear()}`;
+const fTime = d => `${two(d.getHours())}:${two(d.getMinutes())}`;
+const fDT = d => (d.getHours() || d.getMinutes()) ? `${fDate(d)} · ${fTime(d)}` : fDate(d);
+const fShort = d => `${t('weekday' + (d.getDay() === 0 ? 7 : d.getDay()))} ${d.getDate()} ${t('month' + (d.getMonth() + 1))}`;
+const airport = c => AIRPORTS[c] ? `${AIRPORTS[c]} (${c})` : c;
+const uid = () => Math.random().toString(36).slice(2, 10);
+
+// ---------- trip helpers (same rules as the Dart domain) ----------
+const origin = tr => tr.segments[0]?.from || '';
+const isReturn = tr => tr.segments.length > 1 && tr.segments.at(-1).to === origin(tr);
+const dest = tr => !tr.segments.length ? '' : isReturn(tr) ? tr.segments[Math.floor((tr.segments.length - 1) / 2)].to : tr.segments.at(-1).to;
+const stops = tr => { const d = dest(tr), r = []; tr.segments.slice(1).forEach(s => { if (s.from !== d && !r.includes(s.from)) r.push(s.from); }); return r; };
+const depOf = tr => tr.segments[0]?.dep || null;
+const endOf = tr => { for (const s of [...tr.segments].reverse()) { if (s.arr) return s.arr; if (s.dep) return s.dep; } return null; };
+const upcoming = tr => { const e = endOf(tr) || depOf(tr); return !e || e > new Date(Date.now() - 12 * 3600e3); };
+const sorted = () => [...S.trips].sort((a, b) => (depOf(a) || 9e15) - (depOf(b) || 9e15));
+const nextTrip = () => sorted().find(upcoming) || null;
+
+function defaultChecklist(tr) {
+  const k = ['passport', 'ticket', 'visaCheck', ...(stops(tr).length ? ['transitDocuments'] : []), 'hotel', ...(isReturn(tr) ? [] : ['returnTicket']), 'insurance', 'baggage', 'arrivalTime'];
+  return k.map(kind => ({ id: uid(), kind, done: kind === 'ticket' }));
+}
+function defaultReminders(tr) {
+  return [{ id: uid(), kind: 'passportValidity' }, { id: uid(), kind: 'visaCheck', place: dest(tr) },
+    ...stops(tr).map(p => ({ id: uid(), kind: 'transitDocuments', place: p })), { id: uid(), kind: 'insuranceAndDocuments' }].map(r => ({ ...r, checked: false, note: '' }));
+}
+function monthsAfter(exp, end) { let m = (exp.getFullYear() - end.getFullYear()) * 12 + exp.getMonth() - end.getMonth(); if (exp.getDate() < end.getDate()) m--; return m; }
+
+function bagTitle(a) {
+  if (a.pieces === 0) return t('bagNoneTitle');
+  if (a.pieces != null && a.kgPerPiece != null) return t('bagPiecesKgTitle', { n: a.pieces, kg: a.kgPerPiece });
+  if (a.pieces != null) return t('bagPiecesTitle', { n: a.pieces });
+  if (a.totalKg != null) return t('bagTotalTitle', { kg: a.totalKg });
+  return t('notFound');
+}
+function bagMeaning(a, cabin) {
+  const p = cabin ? 'cabin' : 'checked';
+  if (a.pieces === 0) return t(p + 'MeaningNone');
+  if (a.pieces != null && a.kgPerPiece != null) return t(p + 'MeaningPiecesKg', { n: a.pieces, kg: a.kgPerPiece });
+  if (a.pieces != null) return t(p + 'MeaningPieces', { n: a.pieces });
+  if (a.totalKg != null) return t(p + 'MeaningTotal', { kg: a.totalKg });
+  return t('bagCouldNotConfirm');
+}
+
+// ---------- icons ----------
+const I = {
+  home: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  trips: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+  scan: '<path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/>',
+  req: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 12l2 2 4-4M9 17h6"/>',
+  settings: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',
+  bag: '<rect x="6" y="6" width="12" height="15" rx="2"/><path d="M9 6V3h6v3M10 11v5M14 11v5"/>',
+  list: '<path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1.5 1.5L7.5 5M3.5 12l1.5 1.5L7.5 11"/>',
+  plane: '<path d="M2 16l20-8-8 13-2-6z"/>',
+  bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 3z"/>',
+  back: '<path d="M15 18l-6-6 6-6"/>', chev: '<path d="M9 6l6 6-6 6"/>',
+  cam: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
+  img: '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>',
+  file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6"/>',
+  lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  warn: '<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>',
+  info: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>', edit: '<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+  trash: '<path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/>', plus: '<path d="M12 5v14M5 12h14"/>',
+  passport: '<rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M9 16h6"/>',
+  bank: '<path d="M3 10h18M5 10v8M9 10v8M15 10v8M19 10v8M3 21h18M12 3l9 5H3z"/>',
+  link: '<path d="M7 17 17 7M7 7h10v10"/>', shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>', ticket: '<path d="M3 8a2 2 0 0 0 0 4v4a2 2 0 0 1 2 2h14a2 2 0 0 1 2-2v-4a2 2 0 0 1 0-4V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/>',
+};
+const ic = (n, sz = 22, cls = '') => `<svg class="ic ${cls}" width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const logo = sz => `<span class="logo" style="width:${sz}px;height:${sz}px"><svg viewBox="0 0 26 26" width="${sz}" height="${sz}" aria-hidden="true"><g fill="#2EC4B6">${[[6.2, 14.9], [8.3, 11.5], [11.2, 9], [14.4, 7.6]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1"/>`).join('')}<circle cx="5" cy="19" r="2.6"/></g><path d="M17.5 3.5 21 7l-3.5 3.5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+
+// ---------- sample tickets (fictional) ----------
+function sampleTickets() {
+  const d = new Date(Date.now() + 13 * 864e5), r = new Date(Date.now() + 34 * 864e5);
+  const M = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  const dd = x => `${x.getDate()} ${M[x.getMonth()]} ${x.getFullYear()}`, gds = x => `${two(x.getDate())}${M[x.getMonth()]}`;
+  return [
+    { name: 'Ethiopian e-ticket (HGA → ADD → DXB)', text: `Ethiopian Airlines\nELECTRONIC TICKET RECEIPT\nBooking Reference: QK7M2P\nPassenger Name: HASSAN/AMINA MS\n\nFlight  ET 908   Economy\nFrom Hargeisa (HGA) To Addis Ababa (ADD)\nDeparture ${dd(d)} 14:30   Arrival ${dd(d)} 16:20\nTerminal 1\nBaggage allowance: 2PC 23KG\n\nFlight  ET 614   Economy\nFrom Addis Ababa (ADD) To Dubai (DXB)\nDeparture ${dd(d)} 22:10   Arrival 01:15\nBaggage allowance: 2PC 23KG\n\nAdd extra baggage from USD 50 per 10 KG` },
+    { name: 'flydubai WhatsApp confirmation', text: `flydubai\nBooking confirmation\nPNR  B7KQ2L\nMr Abdi Warsame\nHargeisa (HGA) → Dubai (DXB)\nFZ 662  ${dd(d)}  09:15 - 12:40\nChecked baggage 20 kg\nHand baggage 7 kg` },
+    { name: 'Itinerary printout, return trip', text: `ITINERARY\nNAME: ADEN/MOHAMED ALI MR\nRECORD LOCATOR: X4R9TB\n 1 FZ 662 Y ${gds(d)} HGADXB HK1 0915 1240\n 2 FZ 663 Y ${gds(r)} DXBHGA HK1 1340 1505` },
+  ];
+}
+
+// ---------- navigation ----------
+const cur = () => S.stack[S.stack.length - 1];
+function go(r, p = {}) { S.stack.push({ r, ...p }); render(true); }
+function back() { if (S.stack.length > 1) S.stack.pop(); render(true); }
+function tab(name) { S.tab = name; S.stack = [{ r: name }]; render(true); }
+function toast(msg) { S.toast = msg; render(); setTimeout(() => { S.toast = null; render(); }, 2600); }
+
+// ---------- shared UI pieces ----------
+const appbar = (title, sub, withBack = true, extra = '') => `<header class="appbar">${withBack ? `<button class="iconbtn" data-a="back" aria-label="Back">${ic('back', 20, 'flip')}</button>` : ''}<div class="grow"><h1>${esc(title)}</h1>${sub ? `<div class="muted small">${esc(sub)}</div>` : ''}</div>${extra}</header>`;
+const banner = (msg, tone = 'info', title = '', action = '') => `<div class="banner ${tone}">${ic(tone === 'warn' ? 'warn' : tone === 'ok' ? 'check' : 'info', 20)}<div>${title ? `<b>${esc(title)}</b>` : ''}<div>${esc(msg)}</div>${action}</div></div>`;
+const notFound = () => `<span class="nf">${esc(t('notFound'))}</span>`;
+function bagCard(a, cabin, editAction) {
+  const label = t(cabin ? 'cabinBaggage' : 'checkedBaggage');
+  if (!a || a.status === 'conflict' || (a.pieces == null && a.totalKg == null)) {
+    const st = a && a.status === 'conflict' ? t('bagConflict') : t('notFound');
+    return banner(t('bagCouldNotConfirm'), 'warn', `${label} · ${st}`, editAction ? `<button class="link" data-a="${editAction}">${esc(t('bagEnterMyself'))}</button>` : '');
+  }
+  const src = a.source === 'manual' ? t('bagSourceManual') : a.raw ? t('bagSourceTicket', { raw: a.raw }) : '';
+  return `<div class="card row top" ${editAction ? `data-a="${editAction}" role="button" tabindex="0"` : ''}><span class="tile accent">${ic(cabin ? 'bag' : 'trips', 20)}</span><div class="grow"><div class="muted small">${esc(label)}</div><div class="h3">${esc(bagTitle(a))}</div><div class="small">${esc(bagMeaning(a, cabin))}</div>${src ? `<div class="muted xs">${esc(src)}</div>` : ''}</div>${editAction ? ic('edit', 16, 'muted') : ''}</div>`;
+}
+
+// ---------- screens ----------
+const screens = {};
+
+screens.home = () => {
+  const h = new Date().getHours(), g = h < 12 ? 'greetingMorning' : h < 17 ? 'greetingAfternoon' : 'greetingEvening';
+  const tr = nextTrip();
+  const tool = (icn, key, act, accent) => `<button class="card tool" data-a="${act}"><span class="tile ${accent ? 'accent' : ''}">${ic(icn, 20)}</span><span>${esc(t(key))}</span></button>`;
+  return `<div class="scroll pad">
+  <div class="row"><span>${logo(44)}</span><div class="grow"><div class="muted small">${esc(t(g))}</div><div class="h2">${esc(t('guestName'))}</div></div><button class="avatar" data-a="tab:settings" aria-label="${esc(t('profile'))}">${ic('user', 20)}</button></div>
+  <section class="hero"><span class="ring r1"></span><span class="ring r2"></span><div class="eyebrow">${esc(S.lang === 'ar' ? t('scanEyebrow') : t('scanEyebrow').toUpperCase())}</div><div class="hero-t">${esc(t('scanTitle'))}</div><div class="hero-b">${esc(t('scanBody'))}</div><button class="btn turq" data-a="tab:scan">${ic('scan', 20)} ${esc(t('scanButton'))}</button></section>
+  <div class="sect"><h2>${esc(t('upcomingJourney'))}</h2>${tr ? `<button class="link" data-a="trip:${tr.id}">${esc(t('viewTrip'))}</button>` : ''}</div>
+  ${tr ? journeyCard(tr) : `<button class="card row" data-a="tab:scan"><span class="tile">${ic('plane', 20)}</span><div class="grow"><b>${esc(t('noTripTitle'))}</b><div class="muted small">${esc(t('noTripBody'))}</div></div>${ic('chev', 18, 'muted flip')}</button>`}
+  <div class="grid2">${tool('trips', 'myTrips', 'tab:trips')}${tool('req', 'travelRequirements', 'tab:requirements', 1)}${tool('bag', 'baggageChecker', 'go:baggage', 1)}${tool('list', 'travelChecklist', tr ? 'checklist:' + tr.id : 'tab:trips')}</div>
+  <div class="grid2"><button class="card row" data-a="go:guide">${ic('plane', 20, 'acc')}<b>${esc(t('airportGuide'))}</b></button><button class="card row" data-a="go:tips">${ic('bulb', 20, 'acc')}<b>${esc(t('travelTips'))}</b></button></div>
+  </div>`;
+};
+function journeyCard(tr) {
+  const d = depOf(tr), b = tr.checkedBaggage, st = stops(tr), done = tr.checklist.filter(c => c.done).length;
+  const chips = [d ? fDT(d) : null, b && (b.pieces != null || b.totalKg != null) ? bagTitle(b) : null].filter(Boolean);
+  return `<button class="card journey" data-a="trip:${tr.id}"><div class="row"><span class="code">${origin(tr)}</span><div class="grow mid">${st.length ? `<div class="muted xs">${esc(t('viaStops', { stops: st.join(', ') }))}</div>` : ''}<div class="dash">${ic('plane', 16, 'acc')}</div></div><span class="code">${dest(tr)}</span></div>
+  ${chips.length ? `<div class="chips">${chips.map(c => `<span class="chip">${esc(c)}</span>`).join('')}</div>` : ''}
+  <div class="row small"><span class="muted grow">${esc(t('travelChecklist'))}</span><b>${done}/${tr.checklist.length}</b></div><div class="bar"><i style="width:${tr.checklist.length ? done / tr.checklist.length * 100 : 0}%"></i></div></button>`;
+}
+
+screens.scan = () => {
+  const err = S.scanError;
+  return `${appbar(t('scanButton'), '', S.stack.length > 1)}<div class="scroll pad">
+  <div class="scanvis">${S.reading ? `<div class="spin"></div><div class="muted-on-hero">${esc(t('scanReading'))}</div>` : `<div class="frame">${ic('ticket', 54)}</div>`}</div>
+  <h2>${esc(t('scanAddTitle'))}</h2><p class="muted">${esc(t('scanAddBody'))}</p>
+  ${err ? banner(t(err), 'warn', t('scanErrTitle')) : ''}
+  <label class="src primary">${ic('cam', 22, 'turq')}<div><b>${esc(t('scanCamera'))}</b><div class="xs">${esc(t('scanCameraSub'))}</div></div><input type="file" accept="image/*" capture="environment" data-file hidden></label>
+  <label class="card src">${ic('img', 22, 'acc')}<div><b>${esc(t('scanGallery'))}</b><div class="muted xs">${esc(t('scanGallerySub'))}</div></div><input type="file" accept="image/*" data-file hidden></label>
+  <label class="card src">${ic('file', 22, 'acc')}<div><b>${esc(t('scanFile'))}</b><div class="muted xs">${esc(t('scanFileSub'))}</div></div><input type="file" accept="application/pdf,image/*" data-file hidden></label>
+  <div class="preview-box"><div class="xs upper muted">Preview only</div><p class="small">In the app, photos and PDFs are read on the phone. In this web preview, try a sample ticket or paste the text of a ticket:</p>
+  ${sampleTickets().map((s, i) => `<button class="chipbtn" data-a="sample:${i}">${esc(s.name)}</button>`).join('')}
+  <textarea id="paste" rows="5" placeholder="Paste ticket text here…" aria-label="Ticket text"></textarea><button class="btn ghost" data-a="readpaste">Read this text</button></div>
+  ${banner(t('scanPrivacy'), 'info')}<p class="muted xs">${esc(t('scanTips'))}</p></div>`;
+};
+function readText(text) {
+  S.scanError = null; S.reading = true; render();
+  setTimeout(() => {
+    S.reading = false;
+    let p; try { p = parse(text); } catch (e) { S.scanError = 'scanErrFailed'; render(); return; }
+    if (!p.segments.length && !(p.bookingRef && p.airline)) { S.scanError = text.replace(/\s/g, '').length < 25 ? 'scanErrUnreadable' : 'scanErrNotTicket'; render(); return; }
+    const segs = p.segments.map((s, i) => ({ from: s.from, to: s.to, flight: s.flight, dep: s.dep, arr: s.arr, terminal: i === 0 ? p.terminal : null, gate: i === 0 ? p.gate : null }));
+    const bag = b => b.status === 'found' ? { pieces: b.pieces, kgPerPiece: b.kgPerPiece, totalKg: b.totalKg, raw: b.raw.join(' · '), source: 'ticket', status: 'found' } : { status: b.status };
+    S.draft = { passenger: p.passenger, airline: p.airline, bookingRef: p.bookingRef, cls: p.cls, fare: p.fare, segments: segs, checked: bag(p.baggage.checked), cabin: bag(p.baggage.cabin) };
+    go('confirm');
+  }, 900);
+}
+
+screens.confirm = () => {
+  const d = S.draft; if (!d) return `${appbar('')}<div class="pad">${esc(t('confirmNothing'))}</div>`;
+  const row = (key, val, act) => `<button class="frow" data-a="${act}"><span class="muted">${esc(t(key))}</span><span class="val">${val == null || val === '' ? notFound() : `<b>${esc(val)}</b>`}</span>${ic('edit', 14, 'muted')}</button>`;
+  return `${appbar(t('confirmTitle'), t('confirmSubtitle'))}<div class="scroll pad pb">
+  <div class="card nopad">${row('fieldPassenger', d.passenger, 'ed:passenger')}${row('fieldAirline', d.airline, 'ed:airline')}${row('fieldBookingRef', d.bookingRef, 'ed:bookingRef')}${row('fieldClass', d.cls, 'ed:cls')}${row('fieldFare', d.fare, 'ed:fare')}</div>
+  <h2>${esc(t('flightsTitle'))}</h2>${d.segments.length ? '' : banner(t('flightsNone'), 'warn')}
+  ${d.segments.map((s, i) => `<div class="card nopad"><div class="row segh"><span class="h2 grow">${s.from} → ${s.to}</span><button class="iconbtn" data-a="rmseg:${i}" aria-label="${esc(t('flightRemove'))}">${ic('trash', 18)}</button></div>${row('fieldFlight', s.flight, 'eds:' + i + ':flight')}${row('fieldDeparture', s.dep ? fDT(s.dep) : null, 'edt:' + i + ':dep')}${row('fieldArrival', s.arr ? fDT(s.arr) : null, 'edt:' + i + ':arr')}${row('fieldTerminal', s.terminal, 'eds:' + i + ':terminal')}${row('fieldGate', s.gate, 'eds:' + i + ':gate')}</div>`).join('')}
+  <button class="link" data-a="addseg">${ic('plus', 16)} ${esc(t('flightAdd'))}</button>
+  <h2>${esc(t('baggageTitle'))}</h2>${bagCard(d.checked, false, 'bag:checked')}${bagCard(d.cabin, true, 'bag:cabin')}
+  </div><div class="bottom"><button class="btn" data-a="save">${esc(t('saveToTrips'))}</button></div>`;
+};
+
+screens.trips = () => {
+  const list = sorted(), up = list.filter(upcoming), past = list.filter(x => !upcoming(x)).reverse();
+  const tile = tr => `<button class="card row" data-a="trip:${tr.id}"><div class="grow"><div class="h2">${origin(tr)} ${isReturn(tr) ? '⇄' : '→'} ${dest(tr)}</div>${stops(tr).length ? `<div class="muted xs">${esc(t('viaStops', { stops: stops(tr).join(', ') }))}</div>` : ''}<div class="small">${esc([depOf(tr) ? fDT(depOf(tr)) : '', tr.airline || ''].filter(Boolean).join(' · '))}</div></div>${ic('chev', 18, 'muted flip')}</button>`;
+  return `${appbar(t('myTrips'), '', false)}<div class="scroll pad">${!list.length ? empty('trips', t('tripsEmptyTitle'), t('tripsEmptyBody'), `<button class="btn" data-a="tab:scan">${esc(t('scanButton'))}</button>`) :
+    `${up.length ? `<h2>${esc(t('tripsUpcoming'))}</h2>${up.map(tile).join('')}` : ''}${past.length ? `<h2>${esc(t('tripsPast'))}</h2>${past.map(tile).join('')}` : ''}`}</div>`;
+};
+const empty = (icn, title, body, action = '') => `<div class="empty"><span class="tile big accent">${ic(icn, 32)}</span><h2>${esc(title)}</h2><p class="muted">${esc(body)}</p>${action}</div>`;
+
+screens.trip = ({ id }) => {
+  const tr = S.trips.find(x => x.id === id); if (!tr) return `${appbar('')}${empty('trips', t('tripNotFound'), '')}`;
+  const open = tr.reminders.filter(r => !r.checked).length, st = stops(tr), d = depOf(tr), e = endOf(tr);
+  const det = (k, v) => `<div class="det"><span class="muted">${esc(t(k))}</span><b class="${v ? '' : 'muted'}">${esc(v || t('notFound'))}</b></div>`;
+  return `<header class="trip-hero"><div class="row"><button class="iconbtn onhero" data-a="back" aria-label="Back">${ic('back', 20, 'flip')}</button><span class="grow"></span><button class="iconbtn onhero" data-a="deltrip:${tr.id}" aria-label="${esc(t('tripDelete'))}">${ic('trash', 18)}</button></div>
+  <div class="row bottomalign"><div><div class="code big">${origin(tr)}</div>${d ? `<div class="xs">${esc(fShort(d))}</div>` : ''}</div><div class="grow mid">${st.length ? `<div class="xs turqtxt">${esc(t('viaStops', { stops: st.join(', ') }))}</div>` : ''}<div class="dash turq">${ic('plane', 16)}</div></div><div class="end"><div class="code big">${dest(tr)}</div>${e && !isReturn(tr) ? `<div class="xs">${esc(fShort(e))}</div>` : ''}</div></div>
+  ${tr.bookingRef ? `<div class="xs">${esc(t('fieldBookingRef'))}: ${esc(tr.bookingRef)}</div>` : ''}</header>
+  <div class="scroll pad">
+  <div class="grid2"><button class="card tool" data-a="checklist:${tr.id}">${ic('list', 22, 'acc')}<span>${esc(t('travelChecklist'))}</span><span class="muted xs">${tr.checklist.filter(c => c.done).length}/${tr.checklist.length}</span></button>
+  <button class="card tool" data-a="reqtrip:${tr.id}">${ic('req', 22, 'acc')}<span>${esc(t('travelRequirements'))}</span><span class="muted xs">${open ? esc(t('toCheck', { n: open })) : '✓'}</span></button></div>
+  <h2>${esc(t('flightsTitle'))}</h2>${tr.segments.map(s => `<div class="card"><div class="row"><b class="grow h3">${s.from} → ${s.to}</b>${s.flight ? `<span class="chip">${esc(s.flight)}</span>` : ''}</div><div class="muted xs">${esc(airport(s.from))} → ${esc(airport(s.to))}</div>${det('fieldDeparture', s.dep ? fDT(s.dep) : null)}${det('fieldArrival', s.arr ? fDT(s.arr) : null)}${s.terminal ? det('fieldTerminal', s.terminal) : ''}</div>`).join('')}
+  <h2>${esc(t('baggageTitle'))}</h2>${bagCard(tr.checkedBaggage, false, 'tbag:' + tr.id + ':checkedBaggage')}${bagCard(tr.cabinBaggage, true, 'tbag:' + tr.id + ':cabinBaggage')}
+  <h2>${esc(t('bookingTitle'))}</h2><div class="card">${det('fieldPassenger', tr.passenger)}${det('fieldAirline', tr.airline)}${det('fieldBookingRef', tr.bookingRef)}${det('fieldClass', tr.cls)}${det('fieldFare', tr.fare)}</div>
+  <p class="muted xs center">${esc(t('tripCheckAirline'))}</p></div>`;
+};
+
+function ckText(c, tr) {
+  if (c.kind === 'custom') return [c.label, ''];
+  if (c.kind === 'baggage') { const a = tr.checkedBaggage; return [t('ck_baggage'), a && (a.pieces != null || a.totalKg != null) ? bagTitle(a) : t('ck_baggage_hint_unknown')]; }
+  if (c.kind === 'visaCheck') return [t('ck_visaCheck'), t('ck_visaCheck_hint', { place: airport(dest(tr)) })];
+  if (c.kind === 'transitDocuments') return [t('ck_transitDocuments'), t('ck_transitDocuments_hint', { stops: stops(tr).join(', ') })];
+  return [t('ck_' + c.kind), t('ck_' + c.kind + '_hint')];
+}
+const progress = (done, total, title) => `<div class="row prog"><div class="ringp" style="--p:${total ? done / total * 100 : 0}"><span>${total ? Math.round(done / total * 100) : 0}%</span></div><div><div class="h3">${esc(title)}</div><div class="muted small">${esc(t('ckProgress', { done, total }))}</div></div></div>`;
+
+screens.checklist = ({ id }) => {
+  const tr = S.trips.find(x => x.id === id); if (!tr) return appbar('');
+  return `${appbar(t('travelChecklist'))}<div class="scroll pad">${progress(tr.checklist.filter(c => c.done).length, tr.checklist.length, `${origin(tr)} → ${dest(tr)}`)}${banner(t('ckDisclaimer'))}
+  <div class="card nopad">${tr.checklist.map(c => { const [a, b] = ckText(c, tr); return `<div class="ck"><label class="cbx"><input type="checkbox" ${c.done ? 'checked' : ''} data-ck="${tr.id}:${c.id}"><span><b class="${c.done ? 'struck' : ''}">${esc(a)}</b>${b ? `<span class="muted xs">${esc(b)}</span>` : ''}</span></label><button class="iconbtn" data-a="rmck:${tr.id}:${c.id}" aria-label="${esc(t('delete'))}">${ic('trash', 16)}</button></div>`; }).join('')}</div>
+  <form class="addrow" data-add="${tr.id}"><input name="item" maxlength="80" placeholder="${esc(t('ckAddHint'))}" aria-label="${esc(t('ckAdd'))}"><button class="btn small-btn">${ic('plus', 16)} ${esc(t('ckAdd'))}</button></form></div>`;
+};
+
+const RQ = { passportValidity: ['passport', 'rq_passport_title'], visaCheck: ['bank', 'rq_visa_title'], transitDocuments: ['link', 'rq_transit_title'], insuranceAndDocuments: ['shield', 'rq_other_title'] };
+function rqBody(r, tr) {
+  if (r.kind === 'passportValidity') { const x = tr.passportExpiry, e = endOf(tr) || depOf(tr); if (!x) return t('rq_passport_noDate'); if (!e) return t('rq_passport_expires', { date: fDate(x) }); const m = monthsAfter(x, e); return m < 0 ? t('rq_passport_beforeEnd', { date: fDate(x) }) : t('rq_passport_months', { date: fDate(x), n: m }); }
+  if (r.kind === 'visaCheck') return t('rq_visa_body', { place: airport(r.place || dest(tr)) });
+  if (r.kind === 'transitDocuments') return t('rq_transit_body', { place: airport(r.place) });
+  return t('rq_other_body');
+}
+screens.requirements = ({ id } = {}) => {
+  const tr = id ? S.trips.find(x => x.id === id) : nextTrip();
+  const head = appbar(t('travelRequirements'), '', S.stack.length > 1);
+  if (!tr) {
+    const g = [['passport', 'rq_passport_title', 'rq_passport_general'], ['bank', 'rq_visa_title', 'rq_visa_general'], ['link', 'rq_transit_title', 'rq_transit_general'], ['shield', 'rq_other_title', 'rq_other_body']];
+    return `${head}<div class="scroll pad">${banner(t('rqDisclaimer'))}${g.map(([i, a, b]) => `<div class="card row top">${ic(i, 22, 'acc')}<div><b>${esc(t(a))}</b><div class="small">${esc(t(b))}</div></div></div>`).join('')}<button class="btn" data-a="tab:scan">${esc(t('rqScanForTrip'))}</button></div>`;
+  }
+  const custom = tr.checklist.filter(c => c.kind === 'custom');
+  return `${head}<div class="scroll pad">${progress(tr.reminders.filter(r => r.checked).length, tr.reminders.length, `${origin(tr)} → ${dest(tr)}`)}${banner(t('rqDisclaimer'))}
+  ${tr.reminders.map(r => { const [i, k] = RQ[r.kind]; return `<div class="card row top"><span class="tile accent">${ic(i, 20)}</span><div class="grow"><b>${esc(t(k))}</b><div class="small">${esc(rqBody(r, tr))}</div>${r.note ? `<div class="xs note">“${esc(r.note)}”</div>` : ''}${r.kind === 'passportValidity' ? `<label class="link">${esc(t(tr.passportExpiry ? 'rqChangeExpiry' : 'rqAddExpiry'))}<input type="date" data-exp="${tr.id}" class="hiddendate"></label>` : ''}<button class="link" data-a="note:${tr.id}:${r.id}">${esc(t(r.note ? 'rqEditNote' : 'rqAddNote'))}</button></div><label class="cbx solo"><input type="checkbox" ${r.checked ? 'checked' : ''} data-rq="${tr.id}:${r.id}" aria-label="${esc(t(r.checked ? 'rqMarkUnchecked' : 'rqMarkChecked', { item: t(k) }))}"></label></div>`; }).join('')}
+  <h2>${esc(t('rqMyItems'))}</h2><div class="card nopad">${custom.map(c => `<div class="ck"><label class="cbx"><input type="checkbox" ${c.done ? 'checked' : ''} data-ck="${tr.id}:${c.id}"><span><b>${esc(c.label)}</b></span></label><button class="iconbtn" data-a="rmck:${tr.id}:${c.id}" aria-label="${esc(t('delete'))}">${ic('trash', 16)}</button></div>`).join('')}
+  <form class="addrow" data-add="${tr.id}"><input name="item" maxlength="80" placeholder="${esc(t('ckAddHint'))}" aria-label="${esc(t('ckAdd'))}"><button class="btn small-btn">${ic('plus', 16)}</button></form></div><p class="muted xs">${esc(t('rqMyItemsHint'))}</p></div>`;
+};
+
+screens.baggage = () => {
+  const ups = sorted().filter(upcoming);
+  return `${appbar(t('baggageChecker'))}<div class="scroll pad">${!ups.length ? banner(t('bcNoTripBody'), 'info', t('bcNoTripTitle'), `<button class="link" data-a="tab:scan">${esc(t('scanButton'))}</button>`) : ups.map(tr => `<div class="sect"><h2>${origin(tr)} → ${dest(tr)}</h2><button class="link" data-a="trip:${tr.id}">${esc(t('viewTrip'))}</button></div>${bagCard(tr.checkedBaggage, false)}${bagCard(tr.cabinBaggage, true)}`).join('')}
+  <h2>${esc(t('bcCodesTitle'))}</h2><div class="card">${[['1PC · 2PC', 'bcCodePc'], ['23KG · 30KG', 'bcCodeKg'], ['2PC 23KG', 'bcCodePcKg'], ['0PC · NIL', 'bcCodeNil']].map(([c, k]) => `<div class="code-row"><b class="acc">${c}</b><div class="small">${esc(t(k))}</div></div>`).join('')}<div class="muted xs">${esc(t('bcCabinNote'))}</div></div>${banner(t('bcDisclaimer'))}</div>`;
+};
+
+const TOPICS = [['checkin', 'desk'], ['security', 'shield'], ['exitImmigration', 'passport'], ['gates', 'link'], ['boarding', 'ticket'], ['transit', 'plane'], ['arrivalImmigration', 'user'], ['baggageClaim', 'bag']];
+I.desk = '<path d="M3 10h18v4H3zM6 14v6M18 14v6M8 6h8v4H8z"/>';
+screens.guide = () => `${appbar(t('airportGuide'))}<div class="scroll pad"><p class="muted">${esc(t('guideIntro'))}</p>${TOPICS.map(([id, icn], i) => `${i === 0 ? `<h3 class="acc">${esc(t('guideDeparting'))}</h3>` : id === 'transit' ? `<h3 class="acc">${esc(t('guideConnecting'))}</h3>` : id === 'arrivalImmigration' ? `<h3 class="acc">${esc(t('guideArriving'))}</h3>` : ''}<div class="path"><span class="num">${i + 1}</span><button class="card row grow" data-a="topic:${id}">${ic(icn, 22, 'acc')}<div class="grow"><b>${esc(t(`g_${id}_title`))}</b><div class="muted xs clamp">${esc(t(`g_${id}_intro`))}</div></div>${ic('chev', 18, 'muted flip')}</button></div>`).join('')}</div>`;
+screens.topic = ({ id }) => { const i = TOPICS.findIndex(x => x[0] === id), nx = TOPICS[i + 1]; return `${appbar(t(`g_${id}_title`))}<div class="scroll pad"><div class="illus">${ic(TOPICS[i][1], 40)}</div><p class="lead">${esc(t(`g_${id}_intro`))}</p>${[1, 2, 3, 4].map(s => `<div class="step"><span class="num soft">${s}</span><p>${esc(t(`g_${id}_s${s}`))}</p></div>`).join('')}${nx ? `<button class="btn ghost" data-a="topicnext:${nx[0]}">${esc(t('guideNext', { step: t(`g_${nx[0]}_title`) }))}</button>` : ''}</div>`; };
+screens.tips = () => `${appbar(t('travelTips'))}<div class="scroll pad">${['file', 'home', 'bag', 'warn', 'scan', 'trips', 'shield', 'user'].map((icn, i) => `<div class="card row top">${ic(icn, 22, 'acc')}<div><b>${esc(t(`tip${i + 1}_title`))}</b><div class="small">${esc(t(`tip${i + 1}_body`))}</div></div></div>`).join('')}</div>`;
+
+screens.settings = () => {
+  const opt = (name, val, label, on) => `<label class="radio"><input type="radio" name="${name}" value="${val}" ${on ? 'checked' : ''}><span>${esc(label)}</span></label>`;
+  return `${appbar(t('settings'), '', false)}<div class="scroll pad">
+  <div class="glabel">${esc(S.lang === 'ar' ? t('sectionPreferences') : t('sectionPreferences').toUpperCase())}</div>
+  <div class="card"><div class="row">${ic('home', 20)}<b class="grow">${esc(t('language'))}</b></div><div class="seg">${opt('lang', 'en', 'English', S.lang === 'en')}${opt('lang', 'so', 'Soomaali', S.lang === 'so')}${opt('lang', 'ar', 'العربية', S.lang === 'ar')}</div>
+  <div class="row mt">${ic('settings', 20)}<b class="grow">${esc(t('appearance'))}</b></div><div class="seg">${opt('theme', 'light', t('themeLight'), S.theme === 'light')}${opt('theme', 'dark', t('themeDark'), S.theme === 'dark')}</div>
+  <label class="row mt switch"><span class="grow"><b>${esc(t('notifications'))}</b><div class="muted xs">${esc(t('notifSettingHint'))}</div></span><input type="checkbox" data-notif ${S.notif ? 'checked' : ''}></label></div>
+  <div class="glabel">${esc(S.lang === 'ar' ? t('sectionAccount') : t('sectionAccount').toUpperCase())}</div>
+  <div class="card nopad"><button class="frow" data-a="go:account">${ic('user', 20)}<span class="grow"><b>${esc(t('signIn'))}</b><div class="muted xs">${esc(t('signInOptional'))}</div></span>${ic('chev', 16, 'muted flip')}</button><button class="frow" data-a="go:privacy">${ic('lock', 20)}<b class="grow">${esc(t('privacy'))}</b>${ic('chev', 16, 'muted flip')}</button></div>
+  <div class="glabel">${esc(S.lang === 'ar' ? t('sectionAbout') : t('sectionAbout').toUpperCase())}</div>
+  <div class="card"><div class="row">${logo(40)}<div><b>SafarCare</b><div class="acc small">${esc(t('tagline'))}</div></div></div><p class="small">${esc(t('aboutBody'))}</p></div>
+  <p class="center muted xs">${esc(t('version'))} 1.0.0 · web preview</p></div>`;
+};
+screens.account = () => `${appbar(t('account'))}<div class="scroll pad">${empty('user', t('accountsOffTitle'), t('accountsOffBody'))}</div>`;
+screens.privacy = () => `${appbar(t('privacy'))}<div class="scroll pad">${[['scan', 'read'], ['lock', 'store'], ['trips', 'cloud'], ['bulb', 'smart'], ['shield', 'share'], ['trash', 'delete']].map(([i, k]) => `<div class="card row top">${ic(i, 22, 'acc')}<div><b>${esc(t(`pv_${k}_title`))}</b><div class="small">${esc(t(`pv_${k}_body`))}</div></div></div>`).join('')}<button class="btn danger" data-a="wipe">${esc(t('pvDeleteAll'))}</button></div>`;
+
+// ---------- dialogs ----------
+function dialog(title, bodyHtml, onOk, okLabel = t('done'), danger = false) {
+  const el = document.getElementById('dlg');
+  el.innerHTML = `<form class="dlg" method="dialog"><h2>${esc(title)}</h2>${bodyHtml}<div class="row end-row"><button type="button" class="btn ghost" data-close>${esc(t('cancel'))}</button><button class="btn ${danger ? 'danger' : ''}">${esc(okLabel)}</button></div></form>`;
+  el.hidden = false;
+  const form = el.querySelector('form');
+  el.querySelector('[data-close]').onclick = () => { el.hidden = true; };
+  form.onsubmit = e => { e.preventDefault(); const fd = Object.fromEntries(new FormData(form)); el.hidden = true; onOk(fd); };
+  const first = form.querySelector('input,textarea'); (first || form.querySelector('button')).focus();
+}
+const textDlg = (title, val, cb, extra = '') => dialog(title, `<input name="v" value="${esc(val || '')}" maxlength="200" placeholder="${esc(t('leaveEmptyIfUnknown'))}" ${extra}>`, f => cb(f.v.trim()));
+function bagDlg(cabin, a, cb) {
+  dialog(t(cabin ? 'cabinBaggage' : 'checkedBaggage'), `<p class="small">${esc(t('bagManualHelp'))}</p><label class="fl">${esc(t('bagPiecesLabel'))}<input name="p" inputmode="numeric" value="${a?.pieces ?? ''}"></label><label class="fl">${esc(t('bagKgPerPieceLabel'))}<input name="k" inputmode="numeric" value="${a?.kgPerPiece ?? ''}"></label><label class="fl">${esc(t('bagTotalKgLabel'))}<input name="tk" inputmode="numeric" value="${a?.totalKg ?? ''}"></label>`, f => {
+    const n = (v, max) => { const x = parseInt(v, 10); return Number.isFinite(x) && x >= 0 && x <= max ? x : null; };
+    const r = { pieces: n(f.p, 9), kgPerPiece: n(f.k, 50), totalKg: n(f.tk, 150), source: 'manual', status: 'found' };
+    cb(r.pieces != null || r.totalKg != null ? r : { status: 'notFound' });
+  });
+}
+function routeDlg(from, to, cb) {
+  dialog(t('routeTitle'), `<label class="fl">${esc(t('routeFrom'))}<input name="f" maxlength="3" value="${esc(from || '')}" required pattern="[A-Za-z]{3}"></label><label class="fl">${esc(t('routeTo'))}<input name="t" maxlength="3" value="${esc(to || '')}" required pattern="[A-Za-z]{3}"></label><p class="muted xs">${esc(t('airportCodeExample'))}</p>`, f => cb(f.f.toUpperCase(), f.t.toUpperCase()));
+}
+
+// ---------- actions ----------
+const findTrip = id => S.trips.find(x => x.id === id);
+function act(a) {
+  const [k, x, y, z] = a.split(':');
+  const d = S.draft;
+  switch (k) {
+    case 'back': return back();
+    case 'tab': return tab(x);
+    case 'go': return go(x);
+    case 'trip': return go('trip', { id: x });
+    case 'checklist': return go('checklist', { id: x });
+    case 'reqtrip': return go('requirements', { id: x });
+    case 'topic': return go('topic', { id: x });
+    case 'topicnext': S.stack[S.stack.length - 1] = { r: 'topic', id: x }; return render(true);
+    case 'sample': return readText(sampleTickets()[+x].text);
+    case 'readpaste': return readText(document.getElementById('paste').value || '');
+    case 'ed': { const key = { passenger: 'fieldPassenger', airline: 'fieldAirline', bookingRef: 'fieldBookingRef', cls: 'fieldClass', fare: 'fieldFare' }[x]; return textDlg(t(key), d[x], v => { d[x] = v || null; render(); }); }
+    case 'eds': { const key = { flight: 'fieldFlight', terminal: 'fieldTerminal', gate: 'fieldGate' }[y]; return textDlg(t(key), d.segments[+x][y], v => { d.segments[+x][y] = v ? v.toUpperCase() : null; render(); }); }
+    case 'edt': { const s = d.segments[+x], cur = s[y] || s.dep || new Date(); const iso = `${cur.getFullYear()}-${two(cur.getMonth() + 1)}-${two(cur.getDate())}T${two(cur.getHours())}:${two(cur.getMinutes())}`; return dialog(t(y === 'dep' ? 'fieldDeparture' : 'fieldArrival'), `<input type="datetime-local" name="v" value="${iso}">`, f => { s[y] = f.v ? new Date(f.v) : null; render(); }); }
+    case 'rmseg': d.segments.splice(+x, 1); return render();
+    case 'addseg': return routeDlg(d.segments.at(-1)?.to, '', (f, to) => { d.segments.push({ from: f, to, flight: null, dep: null, arr: null }); render(); });
+    case 'bag': return bagDlg(x === 'cabin', d[x], r => { d[x] = r; render(); });
+    case 'save': {
+      if (!d.segments.length) return toast(t('saveNeedsFlight'));
+      const fb = b => b && b.status === 'found' ? b : null;
+      const tr = { id: uid(), passenger: d.passenger, airline: d.airline, bookingRef: d.bookingRef, cls: d.cls, fare: d.fare, segments: d.segments, checkedBaggage: fb(d.checked), cabinBaggage: fb(d.cabin), passportExpiry: null };
+      tr.checklist = defaultChecklist(tr); tr.reminders = defaultReminders(tr);
+      S.trips.push(tr); S.draft = null; persist(); S.tab = 'trips'; S.stack = [{ r: 'trips' }, { r: 'trip', id: tr.id }]; return render(true);
+    }
+    case 'tbag': { const tr = findTrip(x); return bagDlg(y === 'cabinBaggage', tr[y], r => { tr[y] = r.status === 'found' ? r : null; persist(); render(); }); }
+    case 'deltrip': return dialog(t('tripDeleteTitle'), `<p>${esc(t('tripDeleteBody'))}</p>`, () => { S.trips = S.trips.filter(tt => tt.id !== x); persist(); tab('trips'); }, t('delete'), true);
+    case 'rmck': { const tr = findTrip(x); tr.checklist = tr.checklist.filter(c => c.id !== y); persist(); return render(); }
+    case 'note': { const tr = findTrip(x), r = tr.reminders.find(q => q.id === y); return textDlg(t('rqNote'), r.note, v => { r.note = v; persist(); render(); }); }
+    case 'wipe': return dialog(t('pvDeleteAllTitle'), `<p>${esc(t('pvDeleteAllBody'))}</p>`, () => { S.trips = []; persist(); toast(t('pvDeleted')); tab('home'); }, t('delete'), true);
+  }
+}
+
+// ---------- render ----------
+function render(scrollTop) {
+  const root = document.getElementById('phone');
+  document.documentElement.lang = S.lang; root.dir = S.lang === 'ar' ? 'rtl' : 'ltr';
+  root.dataset.theme = S.theme; document.body.dataset.theme = S.theme;
+  const c = cur(); const showTabs = ['home', 'trips', 'scan', 'requirements', 'settings'].includes(S.stack[0].r) && (S.stack.length === 1 || c.r !== 'confirm');
+  const nav = (name, icn, key) => `<button class="nav ${S.tab === name ? 'on' : ''}" data-a="tab:${name}" aria-current="${S.tab === name ? 'page' : 'false'}">${ic(icn, 22)}<span>${esc(t(key))}</span></button>`;
+  const prevScroll = root.querySelector('.scroll')?.scrollTop || 0;
+  root.innerHTML = `<div class="screen">${screens[c.r](c)}</div>${showTabs && c.r !== 'confirm' ? `<nav class="tabs">${nav('home', 'home', 'navHome')}${nav('trips', 'trips', 'navTrips')}<button class="fab ${S.tab === 'scan' ? 'on' : ''}" data-a="tab:scan" aria-label="${esc(t('navScan'))}">${ic('scan', 26)}</button>${nav('requirements', 'req', 'navRequirements')}${nav('settings', 'settings', 'navSettings')}</nav>` : ''}${S.toast ? `<div class="toast" role="status">${esc(S.toast)}</div>` : ''}`;
+  const sc = root.querySelector('.scroll'); if (sc && !scrollTop) sc.scrollTop = prevScroll;
+}
+
+document.addEventListener('click', e => { const b = e.target.closest('[data-a]'); if (b && !b.closest('#dlg')) { e.preventDefault(); act(b.dataset.a); } });
+document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role=button][data-a]')) { e.preventDefault(); act(e.target.dataset.a); } if (e.key === 'Escape') document.getElementById('dlg').hidden = true; });
+document.addEventListener('change', e => {
+  const el = e.target;
+  if (el.name === 'lang') { S.lang = el.value; persist(); return render(); }
+  if (el.name === 'theme') { S.theme = el.value; persist(); return render(); }
+  if (el.dataset.notif !== undefined) { S.notif = el.checked; persist(); return; }
+  if (el.dataset.ck) { const [a, b] = el.dataset.ck.split(':'); const c = findTrip(a).checklist.find(q => q.id === b); c.done = el.checked; persist(); return render(); }
+  if (el.dataset.rq) { const [a, b] = el.dataset.rq.split(':'); const r = findTrip(a).reminders.find(q => q.id === b); r.checked = el.checked; persist(); return render(); }
+  if (el.dataset.exp) { const tr = findTrip(el.dataset.exp); tr.passportExpiry = el.value ? new Date(el.value + 'T00:00') : null; persist(); return render(); }
+  if (el.dataset.file !== undefined && el.files[0]) {
+    const f = el.files[0];
+    if (f.size > 15 * 1024 * 1024) { S.scanError = 'scanErrTooLarge'; return render(); }
+    S.scanError = null; toast('Preview: photo and PDF reading runs on the phone in the real app. Try a sample ticket or paste the text below.');
+  }
+});
+document.addEventListener('submit', e => {
+  const f = e.target; if (!f.dataset.add) return; e.preventDefault();
+  const v = f.item.value.trim(); if (!v) return; findTrip(f.dataset.add).checklist.push({ id: uid(), kind: 'custom', label: v, done: false }); persist(); render();
+});
+render(true);
+
+</script>
+</body>
+</html>
